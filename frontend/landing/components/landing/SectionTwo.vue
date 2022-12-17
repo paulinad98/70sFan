@@ -13,12 +13,13 @@
           <h2
             class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white"
           >
-            We invest in the world’s potential
+            Lorem ipsum, dolor sit amet
           </h2>
           <p class="mb-8 font-light lg:text-xl">
-            Deliver great service experiences fast - without the complexity of
-            traditional ITSM solutions. Accelerate critical development work,
-            eliminate toil, and deploy changes with ease.
+            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Distinctio
+            possimus odio vel tempora minima sapiente pariatur eum aliquam ut
+            hic laudantium incidunt reprehenderit rem officiis adipisci
+            repellat, earum sed maxime.
           </p>
           <!-- List -->
           <ul
@@ -41,8 +42,8 @@
               </svg>
               <span
                 class="text-base font-medium leading-tight text-gray-900 dark:text-white"
-                >Dynamic reports and dashboards</span
-              >
+                >Distinctio possimus odio
+              </span>
             </li>
             <li class="flex space-x-3">
               <!-- Icon -->
@@ -60,8 +61,8 @@
               </svg>
               <span
                 class="text-base font-medium leading-tight text-gray-900 dark:text-white"
-                >Templates for everyone</span
-              >
+                >Distinctio possimus odio
+              </span>
             </li>
             <li class="flex space-x-3">
               <!-- Icon -->
@@ -79,8 +80,9 @@
               </svg>
               <span
                 class="text-base font-medium leading-tight text-gray-900 dark:text-white"
-                >Development workflow</span
               >
+                Distinctio possimus odio
+              </span>
             </li>
             <li class="flex space-x-3">
               <!-- Icon -->
@@ -98,8 +100,9 @@
               </svg>
               <span
                 class="text-base font-medium leading-tight text-gray-900 dark:text-white"
-                >Limitless business automation</span
               >
+                Distinctio possimus odio
+              </span>
             </li>
             <li class="flex space-x-3">
               <!-- Icon -->
@@ -117,13 +120,14 @@
               </svg>
               <span
                 class="text-base font-medium leading-tight text-gray-900 dark:text-white"
-                >Knowledge management</span
               >
+                Distinctio possimus odio
+              </span>
             </li>
           </ul>
           <p class="font-light lg:text-xl">
-            Deliver great service experiences fast - without the complexity of
-            traditional ITSM solutions.
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique
+            minima quae expedita suscipit obcaecati quaerat modi unde.
           </p>
         </div>
       </div>

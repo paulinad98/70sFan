@@ -9,12 +9,13 @@
           <h2
             class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white"
           >
-            Work with tools you already use
+            Lorem ipsum dolor sit amet
           </h2>
           <p class="mb-8 font-light lg:text-xl">
-            Deliver great service experiences fast - without the complexity of
-            traditional ITSM solutions. Accelerate critical development work,
-            eliminate toil, and deploy changes with ease.
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel quasi
+            sapiente, earum dolorem ipsum sunt ab itaque architecto excepturi
+            incidunt at ratione possimus veniam voluptates accusamus dolor
+            aliquam nemo atque.
           </p>
           <!-- List -->
           <ul
@@ -37,8 +38,9 @@
               </svg>
               <span
                 class="text-base font-medium leading-tight text-gray-900 dark:text-white"
-                >Continuous integration and deployment</span
               >
+                Lorem ipsum dolor sit amet consectetur adipisicing elit
+              </span>
             </li>
             <li class="flex space-x-3">
               <!-- Icon -->
@@ -56,8 +58,9 @@
               </svg>
               <span
                 class="text-base font-medium leading-tight text-gray-900 dark:text-white"
-                >Development workflow</span
               >
+                Lorem ipsum dolor sit amet consectetur adipisicing elit
+              </span>
             </li>
             <li class="flex space-x-3">
               <!-- Icon -->
@@ -75,13 +78,14 @@
               </svg>
               <span
                 class="text-base font-medium leading-tight text-gray-900 dark:text-white"
-                >Knowledge management</span
               >
+                Lorem ipsum dolor sit amet consectetur adipisicing elit
+              </span>
             </li>
           </ul>
           <p class="mb-8 font-light lg:text-xl">
-            Deliver great service experiences fast - without the complexity of
-            traditional ITSM solutions.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum a
+            saepe suscipit, iure temporibus vel ducimus.
           </p>
         </div>
         <img
