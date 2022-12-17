@@ -86,7 +86,7 @@
         </div>
         <img
           class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex"
-          src="./images/feature-1.png"
+          src="~/assets/img/no-image.svg"
           alt="dashboard feature image"
         />
       </div>
@@ -94,7 +94,7 @@
       <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
         <img
           class="hidden w-full mb-4 rounded-lg lg:mb-0 lg:flex"
-          src="./images/feature-2.png"
+          src="~/assets/img/no-image.svg"
           alt="feature image 2"
         />
         <div class="text-gray-500 sm:text-lg dark:text-gray-400">
