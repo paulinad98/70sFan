@@ -5,6 +5,7 @@
     <section-one />
     <section-two />
     <section-three />
+    <section-four />
     <join-us />
     <app-footer />
   </div>
@@ -17,6 +18,7 @@ import TheHeader from "@/components/landing/TheHeader.vue";
 import SectionOne from "@/components/landing/SectionOne.vue";
 import SectionTwo from "@/components/landing/SectionTwo.vue";
 import SectionThree from "@/components/landing/SectionThree.vue";
+import SectionFour from "@/components/landing/SectionFour.vue";
 import JoinUs from "@/components/landing/JoinUs.vue";
 
 export default {
@@ -27,6 +29,7 @@ export default {
     SectionOne,
     SectionTwo,
     SectionThree,
+    SectionFour,
     JoinUs,
   },
 };
