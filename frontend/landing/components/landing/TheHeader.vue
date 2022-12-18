@@ -29,7 +29,7 @@
           </a>
           <a
             href="https://www.patreon.com/70sFan"
-            class="inline-flex items-center justify-center w-full px-5 py-3 mb-2 mr-2 text-sm font-medium text-white bg-purple-700 rounded-lg sm:w-auto focus:outline-none hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200"
+            class="inline-flex items-center justify-center w-full px-5 py-3 mb-2 mr-2 text-sm font-medium text-white bg-purple-700 rounded-lg sm:w-auto focus:outline-none hover:bg-gray-500 focus:z-10 focus:ring-4 focus:ring-gray-200"
           >
             <patreon class="w-4 h-4 mr-2" />
 
