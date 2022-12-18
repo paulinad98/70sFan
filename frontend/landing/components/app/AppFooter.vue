@@ -1,16 +1,12 @@
 <template>
-  <footer class="bg-white dark:bg-gray-800">
+  <footer class="bg-primary-300">
     <div class="max-w-screen-xl p-4 py-6 mx-auto md:p-8 lg:p-10">
-      <hr
-        class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8"
-      />
+      <hr class="my-6 border-gray-700 sm:mx-auto lg:my-8" />
       <div class="text-center">
         <div class="flex justify-center">
-          <app-logo class="mb-5 h-6 sm:h-9" />
+          <app-logo class="mb-5 h-6 sm:h-9 fill-black" />
         </div>
-        <span
-          class="block text-sm text-center text-gray-500 dark:text-gray-400"
-        >
+        <span class="block text-sm text-center text-gray-700">
           © 2023 All Rights Reserved
         </span>
         <ul class="flex justify-center mt-5 space-x-5">

@@ -1,14 +1,12 @@
 <template>
-  <section class="bg-gray-50 dark:bg-gray-800">
+  <section class="bg-primary-300">
     <div
       class="max-w-screen-xl px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:py-24 lg:px-6"
     >
       <!-- Row -->
       <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
-        <div class="text-gray-500 sm:text-lg dark:text-gray-400">
-          <h2
-            class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900 dark:text-white"
-          >
+        <div class="text-gray-900 sm:text-lg">
+          <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900">
             Lorem ipsum dolor sit amet
           </h2>
           <p class="mb-8 font-light lg:text-xl">
@@ -18,14 +16,11 @@
             aliquam nemo atque.
           </p>
           <!-- List -->
-          <ul
-            role="list"
-            class="pt-8 space-y-5 border-t border-gray-200 my-7 dark:border-gray-700"
-          >
+          <ul role="list" class="pt-8 space-y-5 border-t border-gray-700">
             <li class="flex space-x-3">
               <!-- Icon -->
               <svg
-                class="flex-shrink-0 w-5 h-5 text-purple-500 dark:text-purple-400"
+                class="flex-shrink-0 w-5 h-5 text-purple-500"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -36,16 +31,14 @@
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <span
-                class="text-base font-medium leading-tight text-gray-900 dark:text-white"
-              >
+              <span class="text-base font-medium leading-tight text-gray-900">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit
               </span>
             </li>
             <li class="flex space-x-3">
               <!-- Icon -->
               <svg
-                class="flex-shrink-0 w-5 h-5 text-purple-500 dark:text-purple-400"
+                class="flex-shrink-0 w-5 h-5 text-purple-500"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -56,16 +49,14 @@
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <span
-                class="text-base font-medium leading-tight text-gray-900 dark:text-white"
-              >
+              <span class="text-base font-medium leading-tight text-gray-900">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit
               </span>
             </li>
             <li class="flex space-x-3">
               <!-- Icon -->
               <svg
-                class="flex-shrink-0 w-5 h-5 text-purple-500 dark:text-purple-400"
+                class="flex-shrink-0 w-5 h-5 text-purple-500"
                 fill="currentColor"
                 viewBox="0 0 20 20"
                 xmlns="http://www.w3.org/2000/svg"
@@ -76,14 +67,12 @@
                   clip-rule="evenodd"
                 ></path>
               </svg>
-              <span
-                class="text-base font-medium leading-tight text-gray-900 dark:text-white"
-              >
+              <span class="text-base font-medium leading-tight text-gray-900">
                 Lorem ipsum dolor sit amet consectetur adipisicing elit
               </span>
             </li>
           </ul>
-          <p class="mb-8 font-light lg:text-xl">
+          <p class="mb-8 mt-5 font-light lg:text-xl">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum a
             saepe suscipit, iure temporibus vel ducimus.
           </p>

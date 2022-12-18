@@ -1,9 +1,9 @@
 <template>
-  <section class="bg-gray-50 dark:bg-gray-800">
+  <section class="bg-primary-300">
     <div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-24 lg:px-6">
       <figure class="max-w-screen-md mx-auto">
         <svg
-          class="h-12 mx-auto mb-3 text-gray-400 dark:text-gray-600"
+          class="h-12 mx-auto mb-3 text-purple-700"
           viewBox="0 0 24 27"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"
@@ -14,9 +14,7 @@
           />
         </svg>
         <blockquote>
-          <p
-            class="text-xl font-medium text-gray-900 md:text-2xl dark:text-white"
-          >
+          <p class="text-xl font-medium text-gray-900 md:text-2xl">
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque
             blanditiis perferendis temporibus? Quis sapiente similique minima
             suscipit soluta quod iure iste facere corporis et. Consequatur
@@ -29,17 +27,9 @@
             src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
             alt="profile picture"
           />
-          <div
-            class="flex items-center divide-x-2 divide-gray-500 dark:divide-gray-700"
-          >
-            <div class="pr-3 font-medium text-gray-900 dark:text-white">
-              Lorem ipsum
-            </div>
-            <div
-              class="pl-3 text-sm font-light text-gray-500 dark:text-gray-400"
-            >
-              Lorem ipsum
-            </div>
+          <div class="flex items-center divide-x-2 divide-gray-500">
+            <div class="pr-3 font-medium text-gray-900">Lorem ipsum</div>
+            <div class="pl-3 text-sm font-light text-gray-500">Lorem ipsum</div>
           </div>
         </figcaption>
       </figure>

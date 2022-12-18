@@ -1,14 +1,14 @@
 <template>
-  <nav class="bg-white border-gray-200 py-6 dark:bg-gray-900 fixed w-full">
+  <nav class="bg-primary-50 border-gray-200 py-6 fixed w-full">
     <div
       class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto"
     >
-      <app-logo class="flex items-center" />
+      <app-logo class="flex items-center fill-white" />
 
       <div class="flex items-center lg:order-2">
         <a
           href="https://themesberg.com/product/tailwind-css/landing-page"
-          class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
+          class="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 focus:outline-none"
         >
           Sign with Pareon
         </a>

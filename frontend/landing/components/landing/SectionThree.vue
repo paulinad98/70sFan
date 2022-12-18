@@ -1,18 +1,16 @@
 <template>
-  <section class="bg-white dark:bg-gray-900">
+  <section class="bg-primary-50">
     <div
       class="items-center max-w-screen-xl px-4 py-8 mx-auto lg:grid lg:grid-cols-4 lg:gap-16 xl:gap-24 lg:py-24 lg:px-6"
     >
       <div class="col-span-2 mb-8">
-        <p class="text-lg font-medium text-purple-600 dark:text-purple-500">
-          Lorem ipsum
-        </p>
+        <p class="text-lg font-medium text-gray-200">Lorem ipsum</p>
         <h2
-          class="mt-3 mb-4 text-3xl font-extrabold tracking-tight text-gray-900 md:text-3xl dark:text-white"
+          class="mt-3 mb-4 text-3xl font-extrabold tracking-tight md:text-3xl text-white"
         >
           Lorem, ipsum dolor sit amet consectetur adipisicing elit
         </h2>
-        <p class="font-light text-gray-500 sm:text-xl dark:text-gray-400">
+        <p class="font-light text-gray-300 sm:text-xl">
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi
           minus quo enim, blanditiis voluptate cupiditate et accusantium
           delectus dicta, pariatur ipsam facilis voluptates quia cumque sequi
@@ -24,7 +22,7 @@
       >
         <div>
           <svg
-            class="w-10 h-10 mb-2 text-purple-600 md:w-12 md:h-12 dark:text-purple-500"
+            class="w-10 h-10 mb-2 md:w-12 md:h-12 text-gray-200"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -35,14 +33,14 @@
               clip-rule="evenodd"
             ></path>
           </svg>
-          <h3 class="mb-2 text-2xl font-bold dark:text-white">99.99%</h3>
-          <p class="font-light text-gray-500 dark:text-gray-400">
+          <h3 class="mb-2 text-2xl font-bold text-white">99.99%</h3>
+          <p class="font-light text-gray-300">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
           </p>
         </div>
         <div>
           <svg
-            class="w-10 h-10 mb-2 text-purple-600 md:w-12 md:h-12 dark:text-purple-500"
+            class="w-10 h-10 mb-2 md:w-12 md:h-12 text-gray-200"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -51,14 +49,14 @@
               d="M9 6a3 3 0 11-6 0 3 3 0 016 0zM17 6a3 3 0 11-6 0 3 3 0 016 0zM12.93 17c.046-.327.07-.66.07-1a6.97 6.97 0 00-1.5-4.33A5 5 0 0119 16v1h-6.07zM6 11a5 5 0 015 5v1H1v-1a5 5 0 015-5z"
             ></path>
           </svg>
-          <h3 class="mb-2 text-2xl font-bold dark:text-white">600M+</h3>
-          <p class="font-light text-gray-500 dark:text-gray-400">
+          <h3 class="mb-2 text-2xl font-bold text-white">600M+</h3>
+          <p class="font-light text-gray-300">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
           </p>
         </div>
         <div>
           <svg
-            class="w-10 h-10 mb-2 text-purple-600 md:w-12 md:h-12 dark:text-purple-500"
+            class="w-10 h-10 mb-2 md:w-12 md:h-12 text-gray-200"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -69,14 +67,14 @@
               clip-rule="evenodd"
             ></path>
           </svg>
-          <h3 class="mb-2 text-2xl font-bold dark:text-white">100+</h3>
-          <p class="font-light text-gray-500 dark:text-gray-400">
+          <h3 class="mb-2 text-2xl font-bold text-white">100+</h3>
+          <p class="font-light text-gray-300">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
           </p>
         </div>
         <div>
           <svg
-            class="w-10 h-10 mb-2 text-purple-600 md:w-12 md:h-12 dark:text-purple-500"
+            class="w-10 h-10 mb-2 md:w-12 md:h-12 text-gray-200"
             fill="currentColor"
             viewBox="0 0 20 20"
             xmlns="http://www.w3.org/2000/svg"
@@ -85,8 +83,8 @@
               d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"
             ></path>
           </svg>
-          <h3 class="mb-2 text-2xl font-bold dark:text-white">5+</h3>
-          <p class="font-light text-gray-500 dark:text-gray-400">
+          <h3 class="mb-2 text-2xl font-bold text-white">5+</h3>
+          <p class="font-light text-gray-300">
             Lorem ipsum dolor sit amet consectetur, adipisicing elit.
           </p>
         </div>
