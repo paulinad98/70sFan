@@ -1,10 +1,10 @@
 const express = require("express");
 
-const authRoutes = require("./routes/auth");
+const oauthRoutes = require("./routes/oauth");
 
 const app = express();
-app.use("/auth", authRoutes);
+app.use("/oauth", oauthRoutes);
 
-app.listen(8080, () => {
-  console.log("Server listening on port 8080");
+app.listen(5000, () => {
+  console.log("Server listening on port 5000");
 });
