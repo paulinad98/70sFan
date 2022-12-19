@@ -12,7 +12,7 @@
         </p>
         <a
           href="https://www.patreon.com/70sFan/membership"
-          class="text-white bg-purple-700 hover:bg-gray-500 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
+          class="text-white bg-purple-700 hover:bg-gray-500 focus:ring-4 focus:ring-whitefont-medium rounded-lg text-sm px-5 py-2.5 mr-2 mb-2 focus:outline-none"
         >
           Become a Patreon
         </a>
