@@ -22,9 +22,9 @@
         </blockquote>
         <figcaption class="flex items-center justify-center mt-6 space-x-3">
           <img
-            class="w-6 h-6 rounded-full"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
-            alt="profile picture"
+            class="w-12 rounded-full object-cover"
+            src="~/assets/img/james-naismith.jpg"
+            alt="James Naismith picture"
           />
           <div class="flex items-center divide-x-2 divide-gray-500">
             <div class="pr-3 font-medium text-gray-900">James Naismith</div>
