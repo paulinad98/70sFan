@@ -9,13 +9,10 @@ const oauthClientPatreon = oauth(clientId, clientSecret);
 exports.oauthClient = async (req, res, next) => {
   const { code } = req.query;
 
-  return oauthClientPatreon
-    .getTokens(code, redirect)
-    .then(({ access_token }) => {
-      token = access_token;
-      console.log(token);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+  try {
+    const { access_token } = await oauthClientPatreon.getTokens(code, redirect);
+    console.log(access_token);
+  } catch (err) {
+    console.log(err);
+  }
 };
