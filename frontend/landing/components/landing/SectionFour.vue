@@ -15,21 +15,22 @@
         </svg>
         <blockquote>
           <p class="text-xl font-medium text-gray-900 md:text-2xl">
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque
-            blanditiis perferendis temporibus? Quis sapiente similique minima
-            suscipit soluta quod iure iste facere corporis et. Consequatur
-            officia ad incidunt labore harum!"
+            "I am sure that no man can derive more pleasure from money or power
+            than I do from seeing a pair of basketball goals in some out of the
+            way place."
           </p>
         </blockquote>
         <figcaption class="flex items-center justify-center mt-6 space-x-3">
           <img
-            class="w-6 h-6 rounded-full"
-            src="https://flowbite.s3.amazonaws.com/blocks/marketing-ui/avatars/michael-gouch.png"
-            alt="profile picture"
+            class="w-12 rounded-full object-cover"
+            src="~/assets/img/james-naismith.jpg"
+            alt="James Naismith picture"
           />
           <div class="flex items-center divide-x-2 divide-gray-500">
-            <div class="pr-3 font-medium text-gray-900">Lorem ipsum</div>
-            <div class="pl-3 text-sm font-light text-gray-500">Lorem ipsum</div>
+            <div class="pr-3 font-medium text-gray-900">James Naismith</div>
+            <div class="pl-3 text-sm font-light text-gray-500">
+              Father of basketball
+            </div>
           </div>
         </figcaption>
       </figure>

@@ -7,13 +7,14 @@
       <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
         <div class="text-gray-900 sm:text-lg">
           <h2 class="mb-4 text-3xl font-extrabold tracking-tight text-gray-900">
-            Lorem ipsum dolor sit amet
+            NBA Greatest Centers
           </h2>
           <p class="mb-8 font-light lg:text-xl">
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Vel quasi
-            sapiente, earum dolorem ipsum sunt ab itaque architecto excepturi
-            incidunt at ratione possimus veniam voluptates accusamus dolor
-            aliquam nemo atque.
+            A huge secondary project focused on the best bigmen in the NBA
+            history. If you have ever wondered how to compare Bill Russell
+            defensive dominance with Nikola Jokic passing maestry, or how to
+            compare Bill Walton and Hakeem Olajuwon shotblocking, this is a good
+            place to start your journey!
           </p>
           <!-- List -->
           <ul role="list" class="pt-8 space-y-5 border-t border-gray-700">
@@ -32,7 +33,7 @@
                 ></path>
               </svg>
               <span class="text-base font-medium leading-tight text-gray-900">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit
+                Scouting reports of the greatest centers in the NBA history
               </span>
             </li>
             <li class="flex space-x-3">
@@ -50,7 +51,7 @@
                 ></path>
               </svg>
               <span class="text-base font-medium leading-tight text-gray-900">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit
+                Shot charts and scoring data from representative samples
               </span>
             </li>
             <li class="flex space-x-3">
@@ -68,13 +69,15 @@
                 ></path>
               </svg>
               <span class="text-base font-medium leading-tight text-gray-900">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit
+                Low post scoring repertoire breakdowns!
               </span>
             </li>
           </ul>
           <p class="mb-8 mt-5 font-light lg:text-xl">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum a
-            saepe suscipit, iure temporibus vel ducimus.
+            You can check here how accurate Kareem skyhook truly was or how
+            often Shaq actually dunked on his defenders in the post. You can see
+            who had a better fadeaway between Wilt Chamberlain and Hakeem
+            Olajuwon, then compare them to famous Tim Duncan bankshot.
           </p>
         </div>
         <img
