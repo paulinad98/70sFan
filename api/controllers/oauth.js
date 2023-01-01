@@ -13,7 +13,7 @@ const jwtPrivateKey = process.env.PRIVATE_KEY;
 const oauthClientPatreon = oauth(clientId, clientSecret);
 
 const url =
-  "https://www.patreon.com/api/oauth2/v2/identity?include=memberships&fields%5Bmember%5D=last_charge_status,full_name";
+  "https://www.patreon.com/api/oauth2/v2/identity?include=memberships&fields%5Bmember%5D=last_charge_status,full_name,last_charge_date";
 
 const options = (token) => {
   return {
@@ -22,6 +22,15 @@ const options = (token) => {
       Authorization: `Bearer ${token}`,
     },
   };
+};
+
+const dateDiffInSeconds = (a, b) => {
+  const MS_PER_SECOND = 1000;
+
+  const utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
+  const utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
+
+  return Math.floor((utc2 - utc1) / MS_PER_SECOND);
 };
 
 exports.oauthClient = async (req, res, next) => {
@@ -35,7 +44,8 @@ exports.oauthClient = async (req, res, next) => {
     const patreonDataIncluded = patreonData.included[0];
 
     const { id } = patreonDataIncluded;
-    const { full_name, last_charge_status } = patreonDataIncluded.attributes;
+    const { full_name, last_charge_status, last_charge_date } =
+      patreonDataIncluded.attributes;
 
     if (last_charge_status !== "Paid") {
       return res.status(401).send({
@@ -44,8 +54,13 @@ exports.oauthClient = async (req, res, next) => {
       });
     }
 
+    const lastChargeDate = new Date(last_charge_date);
+    const expiresDate = lastChargeDate;
+    expiresDate.setMonth(lastChargeDate.getMonth() + 1);
+    expiresDate.setDate(15);
+
     const token = jwt.sign({ id, full_name }, jwtPrivateKey, {
-      expiresIn: "3 days",
+      expiresIn: dateDiffInSeconds(new Date(), expiresDate),
     });
 
     return res.status(200).send({
