@@ -6,15 +6,15 @@ const Patreon = require("../models/patreon");
 
 const jwt = require("jsonwebtoken");
 
-const clientId = process.env.PATREON_CLIENT_ID;
-const clientSecret = process.env.PATREON_CLIENT_SECRET;
-const redirect = process.env.PATREON_REDIRECT_URI;
+const CLIENT_ID = process.env.PATREON_CLIENT_ID;
+const CLIENT_SECRET = process.env.PATREON_CLIENT_SECRET;
+const REDIRECT = process.env.PATREON_REDIRECT_URI;
 
-const jwtPrivateKey = process.env.PRIVATE_KEY;
+const JWT_PRIVATE_KEY = process.env.PRIVATE_KEY;
 
-const oauthClientPatreon = oauth(clientId, clientSecret);
+const oauthClientPatreon = oauth(CLIENT_ID, CLIENT_SECRET);
 
-const url =
+const URL =
   "https://www.patreon.com/api/oauth2/v2/identity?include=memberships&fields%5Bmember%5D=last_charge_status,full_name,last_charge_date";
 
 const options = (token) => {
@@ -39,9 +39,9 @@ exports.oauthClient = async (req, res, next) => {
   const { code } = req.query;
 
   try {
-    const { access_token } = await oauthClientPatreon.getTokens(code, redirect);
+    const { access_token } = await oauthClientPatreon.getTokens(code, REDIRECT);
 
-    const response = await fetch(url, options(access_token));
+    const response = await fetch(URL, options(access_token));
     const patreonData = await response.json();
     const patreonDataIncluded = patreonData.included[0];
 
@@ -61,7 +61,7 @@ exports.oauthClient = async (req, res, next) => {
     expiresDate.setMonth(lastChargeDate.getMonth() + 1);
     expiresDate.setDate(15);
 
-    const token = jwt.sign({ id, full_name }, jwtPrivateKey, {
+    const token = jwt.sign({ id, full_name }, JWT_PRIVATE_KEY, {
       expiresIn: dateDiffInSeconds(new Date(), expiresDate),
     });
 
