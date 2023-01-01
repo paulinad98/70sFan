@@ -2,6 +2,8 @@ const { oauth } = require("patreon");
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
+const Patreon = require("../models/patreon");
+
 const jwt = require("jsonwebtoken");
 
 const clientId = process.env.PATREON_CLIENT_ID;
@@ -62,6 +64,11 @@ exports.oauthClient = async (req, res, next) => {
     const token = jwt.sign({ id, full_name }, jwtPrivateKey, {
       expiresIn: dateDiffInSeconds(new Date(), expiresDate),
     });
+
+    const pareon = await Patreon.findByPk(id);
+    if (!pareon) {
+      Patreon.create({ id, name: full_name });
+    }
 
     return res.status(200).send({
       ok: true,
