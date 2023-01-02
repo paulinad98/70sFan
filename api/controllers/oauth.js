@@ -11,6 +11,7 @@ const CLIENT_SECRET = process.env.PATREON_CLIENT_SECRET;
 const REDIRECT = process.env.PATREON_REDIRECT_URI;
 
 const JWT_PRIVATE_KEY = process.env.PRIVATE_KEY;
+const ADMIN_ID = process.env.ADMIN_ID;
 
 const oauthClientPatreon = oauth(CLIENT_ID, CLIENT_SECRET);
 
@@ -48,6 +49,14 @@ exports.oauthClient = async (req, res, next) => {
     const { id } = patreonDataIncluded;
     const { full_name, last_charge_status, last_charge_date } =
       patreonDataIncluded.attributes;
+
+    if (id === ADMIN_ID) {
+      return res.status(200).send({
+        ok: true,
+        token,
+        patreon: { id, full_name, admin: true },
+      });
+    }
 
     if (last_charge_status !== "Paid") {
       return res.status(401).send({
