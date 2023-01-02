@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const bodyParser = require("body-parser");
 
 const sequelize = require("./util/database");
 
@@ -12,6 +13,8 @@ const gameRoutes = require("./routes/game");
 const teamRoutes = require("./routes/team");
 
 const app = express();
+
+app.use(bodyParser.json());
 app.use("/oauth", oauthRoutes);
 app.use("/game", gameRoutes);
 app.use("/team", teamRoutes);
