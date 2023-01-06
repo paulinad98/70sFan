@@ -1,10 +1,14 @@
 const Sequelize = require("sequelize");
 
-const databasePassword = process.env.DATABASE_PASSWORD;
+const DATABASE_PASSWORD = process.env.DATABASE_PASSWORD;
+const DATABASE_HOST = process.env.DATABASE_HOST;
+const DATABASE_PORT = process.env.DATABASE_PORT;
+const DATABASE_USER = process.env.DATABASE_USER;
 
-const sequelize = new Sequelize("70sfan", "root", databasePassword, {
+const sequelize = new Sequelize("70sfan", DATABASE_USER, DATABASE_PASSWORD, {
   dialect: "mysql",
-  host: "localhost",
+  host: DATABASE_HOST,
+  port: DATABASE_PORT,
 });
 
 module.exports = sequelize;
