@@ -15,6 +15,11 @@ const teamRoutes = require("./routes/team");
 const app = express();
 
 app.use(bodyParser.json());
+
+app.get("/", (req, res) => {
+  res.send("Express on Vercel");
+});
+
 app.use("/oauth", oauthRoutes);
 app.use("/game", gameRoutes);
 app.use("/team", teamRoutes);
@@ -31,3 +36,5 @@ const startServer = async () => {
 };
 
 startServer();
+
+module.exports = app;
