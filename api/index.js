@@ -30,7 +30,7 @@ const startServer = async () => {
     Game.belongsToMany(Team, { through: "TeamGames" });
     Team.belongsToMany(Game, { through: "TeamGames" });
 
-    await sequelize.sync({ force: true });
+    await sequelize.sync();
     app.listen(5000, () => {
       console.log("Server listening on port 5000");
     });

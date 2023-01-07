@@ -1,3 +1,5 @@
+const { Op } = require("sequelize");
+
 const Game = require("../models/game");
 const TeamGames = require("../models/teamGames");
 const Team = require("../models/team");
@@ -10,7 +12,6 @@ exports.postGame = async (req, res, next) => {
   const {
     date,
     season,
-    teamId,
     homeTeamScore,
     awayTeamScore,
     homeTeamId,
@@ -24,7 +25,6 @@ exports.postGame = async (req, res, next) => {
     const game = await Game.create({
       date,
       season,
-      teamId,
       homeTeamScore,
       awayTeamScore,
       homeTeamId,
@@ -46,10 +46,21 @@ exports.postGame = async (req, res, next) => {
 };
 
 exports.getGames = async (req, res, next) => {
-  try {
-    const game = await Game.findAll({ include: { model: Team } });
+  const { season, homeTeamId, awayTeamId } = req.body;
 
-    return res.status(201).send(game);
+  let conditions = [{ season }, { homeTeamId }, { awayTeamId }];
+
+  conditions = conditions.filter((condition) => {
+    return Object.values(condition)[0] !== undefined;
+  });
+
+  try {
+    const games = await Game.findAll({
+      where: { [Op.and]: [...conditions] },
+      include: { model: Team },
+    });
+
+    return res.status(201).send(games);
   } catch (err) {
     return res.status(500).send(err);
   }
