@@ -68,7 +68,6 @@ exports.oauthClient = async (req, res, next) => {
     const lastChargeDate = new Date(last_charge_date);
     const expiresDate = lastChargeDate;
     expiresDate.setMonth(lastChargeDate.getMonth() + 1);
-    expiresDate.setDate(15);
 
     const token = jwt.sign({ id, full_name }, JWT_PRIVATE_KEY, {
       expiresIn: dateDiffInSeconds(new Date(), expiresDate),
