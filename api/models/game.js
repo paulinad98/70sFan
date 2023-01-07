@@ -10,6 +10,7 @@ const Game = sequelize.define("game", {
     autoIncrement: true,
   },
   date: { type: Sequelize.DATE, allowNull: false },
+  season: { type: Sequelize.STRING, allowNull: false },
   homeTeamId: { type: Sequelize.INTEGER, allowNull: false },
   awayTeamId: { type: Sequelize.INTEGER, allowNull: false },
   homeTeamScore: { type: Sequelize.INTEGER, allowNull: false },

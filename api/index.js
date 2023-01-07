@@ -7,6 +7,7 @@ const sequelize = require("./util/database");
 const Patreon = require("./models/patreon");
 const Team = require("./models/team");
 const Game = require("./models/game");
+const TeamGames = require("./models/teamGames");
 
 const oauthRoutes = require("./routes/oauth");
 const gameRoutes = require("./routes/game");
@@ -26,6 +27,9 @@ app.use("/team", teamRoutes);
 
 const startServer = async () => {
   try {
+    Game.belongsToMany(Team, { through: "TeamGames" });
+    Team.belongsToMany(Game, { through: "TeamGames" });
+
     await sequelize.sync({ force: true });
     app.listen(5000, () => {
       console.log("Server listening on port 5000");
