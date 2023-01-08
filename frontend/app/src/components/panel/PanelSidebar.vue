@@ -5,7 +5,7 @@ import PanelSidebarLink from "@/components/panel/PanelSidebarLink.vue";
 </script>
 
 <template>
-  <aside class="w-64" aria-label="Sidebar">
+  <aside class="w-64 bg-white" aria-label="Sidebar">
     <div
       class="px-3 py-4 overflow-y-auto rounded divide-y divide-gray-200 border border-primary-50"
     >
