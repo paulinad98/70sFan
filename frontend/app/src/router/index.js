@@ -10,8 +10,8 @@ const router = createRouter({
       component: HomeView,
     },
     {
-      path: "/panel",
-      name: "panel",
+      path: "/panel/:tab?",
+      name: "Panel",
       component: () => import("../views/PanelView.vue"),
     },
   ],
