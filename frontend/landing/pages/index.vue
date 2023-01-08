@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="bg-primary-300">
     <app-navigation>
       <login-button />
     </app-navigation>

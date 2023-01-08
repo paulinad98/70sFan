@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-primary-300">
+  <section>
     <div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-24 lg:px-6">
       <figure class="max-w-screen-md mx-auto">
         <svg

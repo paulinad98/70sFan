@@ -1,5 +1,5 @@
 <template>
-  <section class="bg-primary-300">
+  <section>
     <div class="max-w-screen-xl mx-auto px-4">
       <div class="max-w-screen-sm mx-auto text-center">
         <h2

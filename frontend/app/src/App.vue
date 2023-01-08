@@ -16,9 +16,11 @@ export default defineComponent({
 </script>
 
 <template>
-  <div>
+  <div class="bg-primary-300 min-h-screen flex flex-col justify-between">
     <app-navigation />
-    <RouterView />
+    <div>
+      <RouterView class="pt-28 px-10 xl:px-0 max-w-screen-xl mx-auto" />
+    </div>
     <app-footer />
   </div>
 </template>
