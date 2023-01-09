@@ -28,8 +28,8 @@ import CloseIcon from "@/components/icons/CloseIcon.vue";
             </template>
           </base-button>
         </div>
-        <div class="p-6 space-y-6">
-          <slot name="body"></slot>
+        <div class="p-6">
+          <slot name="body"> </slot>
         </div>
 
         <div
