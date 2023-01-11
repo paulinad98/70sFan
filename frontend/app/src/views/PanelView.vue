@@ -18,7 +18,7 @@ const teamName = ref("");
   <div class="flex gap-14 items-start">
     <panel-sidebar />
     <div class="flex items-center gap-7">
-      <base-modal v-if="isActive" @close="toggleModal()">
+      <base-modal v-model="isActive">
         <template #header>Add team</template>
 
         <template #body>
