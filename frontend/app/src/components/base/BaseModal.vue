@@ -31,7 +31,7 @@ onUpdated(() => {
         class="fixed top-0 left-0 right-0 z-50 w-full p-4 overflow-x-hidden overflow-y-hidden h-full flex justify-center items-center bg-black/[.80] transition duration-300"
       >
         <div
-          class="relative w-full max-w-2xl max-h-[80%] overflow-y-auto bg-white rounded-lg border border-primary-50 shadow transition duration-300"
+          class="relative w-full max-w-xl max-h-[80%] overflow-y-auto bg-white rounded-lg border border-primary-50 shadow transition duration-300"
         >
           <header
             class="flex items-start justify-between p-4 border-b border-gray-300 rounded-t"

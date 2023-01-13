@@ -4,6 +4,7 @@ import BaseButton from "@/components/base/BaseButton.vue";
 import BaseModal from "@/components/base/BaseModal.vue";
 import PlusIcon from "@/components/icons/PlusIcon.vue";
 import BaseInput from "@/components/base/BaseInput.vue";
+import BaseForm from "@/components/base/BaseForm.vue";
 
 import { ref } from "vue";
 
@@ -11,7 +12,14 @@ import { useHandleModal } from "@/composables/useHandleModal";
 
 const { isActive, toggleModal } = useHandleModal();
 
-const teamName = ref("");
+const teamForm = ref({
+  teamName: { name: "", label: "Name" },
+  teamLogoUrl: { name: "", label: "Logo url" },
+});
+
+const sendForm = () => {
+  console.log(teamForm.value);
+};
 </script>
 
 <template>
@@ -22,11 +30,20 @@ const teamName = ref("");
         <template #header>Add team</template>
 
         <template #body>
-          <base-input
-            type="text"
-            label="Team name"
-            v-model="teamName"
-          ></base-input>
+          <base-form @submit="sendForm()">
+            <base-input
+              type="text"
+              :label="teamForm.teamName.label"
+              v-model="teamForm.teamName.name"
+              class="mb-2.5"
+            ></base-input>
+            <base-input
+              type="text"
+              :label="teamForm.teamLogoUrl.label"
+              v-model="teamForm.teamLogoUrl.name"
+              class="mb-4"
+            ></base-input>
+          </base-form>
         </template>
 
         <template #footer>
