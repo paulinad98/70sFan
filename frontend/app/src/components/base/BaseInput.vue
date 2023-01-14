@@ -44,7 +44,7 @@ defineEmits(["update:modelValue"]);
     :aria-describedby="error ? `${id}-error` : ''"
     :aria-invalid="error"
   />
-  <p v-if="error" :id="`${id}-error`" class="mt-2 text-sm text-red-600">
+  <p v-if="error" :id="`${id}-error`" class="text-sm text-red-600">
     {{ error }}
   </p>
 </template>

@@ -6,19 +6,18 @@ import PlusIcon from "@/components/icons/PlusIcon.vue";
 import BaseInput from "@/components/base/BaseInput.vue";
 import BaseForm from "@/components/base/BaseForm.vue";
 
-import { ref } from "vue";
-
 import { useHandleModal } from "@/composables/useHandleModal";
+import { useSetForm } from "@/composables/useSetForm";
 
 const { isActive, toggleModal } = useHandleModal();
 
-const teamForm = ref({
-  teamName: { name: "", label: "Name" },
-  teamLogoUrl: { name: "", label: "Logo url" },
-});
+const { form: teamForm, setupInput, resetForm } = useSetForm();
+
+setupInput({ name: "teamName", label: "Name", map: teamForm });
+setupInput({ name: "teamLogoUrl", label: "Logo url", map: teamForm });
 
 const sendForm = () => {
-  console.log(teamForm.value);
+  resetForm();
 };
 </script>
 
@@ -33,15 +32,16 @@ const sendForm = () => {
           <base-form @submit="sendForm()">
             <base-input
               type="text"
-              :label="teamForm.teamName.label"
-              v-model="teamForm.teamName.name"
-              class="mb-2.5"
+              :label="teamForm.get('teamName').label"
+              :error="teamForm.get('teamName').error"
+              v-model="teamForm.get('teamName').value"
             ></base-input>
+            <br class="my-2.5 block content-['']" />
             <base-input
               type="text"
-              :label="teamForm.teamLogoUrl.label"
-              v-model="teamForm.teamLogoUrl.name"
-              class="mb-4"
+              :label="teamForm.get('teamLogoUrl').label"
+              :error="teamForm.get('teamLogoUrl').error"
+              v-model="teamForm.get('teamLogoUrl').value"
             ></base-input>
           </base-form>
         </template>
