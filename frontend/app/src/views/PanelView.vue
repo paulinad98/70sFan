@@ -8,6 +8,7 @@ import BaseForm from "@/components/base/BaseForm.vue";
 
 import { useHandleModal } from "@/composables/useHandleModal";
 import { useSetForm } from "@/composables/useSetForm";
+import { useFetchApi } from "@/composables/useFetchApi";
 
 const { isActive, toggleModal } = useHandleModal();
 
@@ -16,7 +17,18 @@ const { form: teamForm, setupInput, resetForm } = useSetForm();
 setupInput({ name: "teamName", label: "Name", map: teamForm });
 setupInput({ name: "teamLogoUrl", label: "Logo url", map: teamForm });
 
-const sendForm = () => {
+const { getData } = useFetchApi();
+
+const sendForm = async () => {
+  const name = teamForm.value.get("teamName").value;
+  const logoUrl = teamForm.value.get("teamLogoUrl").value;
+
+  await getData({
+    method: "POST",
+    endpoint: "team",
+    payload: { name, logoUrl },
+  });
+
   resetForm();
 };
 </script>
