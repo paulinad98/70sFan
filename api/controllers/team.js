@@ -11,3 +11,13 @@ exports.postTeam = async (req, res, next) => {
     return res.status(500).send(err);
   }
 };
+
+exports.getTeams = async (req, res, next) => {
+  try {
+    const teams = await Team.findAll();
+
+    return res.status(202).send(teams);
+  } catch (err) {
+    return res.status(500).send(err);
+  }
+};
