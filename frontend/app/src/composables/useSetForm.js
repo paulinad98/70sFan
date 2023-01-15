@@ -5,10 +5,28 @@ import { useValidateInput } from "@/composables/useValidateInput";
 export function useSetForm() {
   const form = ref(new Map());
 
-  const setupInput = ({ name, label, map }) => {
-    const { error, value, reset } = useValidateInput();
+  const setupInput = ({ name, label, map, validators = [] }) => {
+    const { error, value, reset, addValidator, validate } = useValidateInput();
 
-    map.value.set(name, { label, error, value, reset });
+    addValidator(validators);
+
+    map.value.set(name, { label, error, value, reset, validate });
+  };
+
+  const validateForm = () => {
+    let isError = false;
+
+    form.value.forEach((input) => {
+      const error = input.validate();
+
+      console.log(error);
+
+      if (!isError && error) {
+        isError = true;
+      }
+    });
+
+    return isError;
   };
 
   const resetForm = () => {
@@ -17,5 +35,5 @@ export function useSetForm() {
     });
   };
 
-  return { form, setupInput, resetForm };
+  return { form, setupInput, resetForm, validateForm };
 }

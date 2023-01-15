@@ -12,14 +12,32 @@ import { useFetchApi } from "@/composables/useFetchApi";
 
 const { isActive, toggleModal } = useHandleModal();
 
-const { form: teamForm, setupInput, resetForm } = useSetForm();
+const { form: teamForm, setupInput, resetForm, validateForm } = useSetForm();
 
-setupInput({ name: "teamName", label: "Name", map: teamForm });
-setupInput({ name: "teamLogoUrl", label: "Logo url", map: teamForm });
+setupInput({
+  name: "teamName",
+  label: "Name",
+  map: teamForm,
+  validators: ["required"],
+});
+setupInput({
+  name: "teamLogoUrl",
+  label: "Logo url",
+  map: teamForm,
+  validators: ["required"],
+});
 
 const { getData } = useFetchApi();
 
 const sendForm = async () => {
+  const isError = validateForm();
+
+  console.log(isError);
+
+  if (isError) {
+    return;
+  }
+
   const name = teamForm.value.get("teamName").value;
   const logoUrl = teamForm.value.get("teamLogoUrl").value;
 
