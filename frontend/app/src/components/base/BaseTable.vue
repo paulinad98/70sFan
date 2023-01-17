@@ -20,13 +20,13 @@ defineProps({
         <th
           :key="`header-${index}`"
           v-for="(header, index) in headers"
-          class="px-6 py-3 whitespace-nowrap text-xs text-gray-700 uppercase bg-gray-50"
+          class="px-6 py-3 whitespace-nowrap text-xs text-white uppercase bg-primary-50"
         >
           {{ header }}
         </th>
 
         <th
-          class="px-6 py-3 whitespace-nowrap text-xs text-gray-700 uppercase bg-gray-50"
+          class="px-6 py-3 whitespace-nowrap text-xs text-white uppercase bg-primary-50"
         >
           <span class="sr-only">Edit</span>
         </th>
