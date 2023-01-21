@@ -113,9 +113,7 @@ const sendForm = async () => {
         </base-button>
       </header>
 
-      <base-table :headers="['ID', 'NAME', 'URL']" :rows="teamData">
-        <template #action>Edit</template>
-      </base-table>
+      <base-table :headers="['ID', 'NAME', 'URL']" :rows="teamData" />
     </div>
   </div>
 </template>

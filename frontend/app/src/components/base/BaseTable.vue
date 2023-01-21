@@ -1,5 +1,7 @@
 <script setup>
-defineProps({
+import { ref, useSlots, onUpdated } from "vue";
+
+const props = defineProps({
   headers: {
     type: Array,
   },
@@ -8,12 +10,25 @@ defineProps({
     required: true,
   },
 });
+
+defineEmits(["action"]);
+
+const slots = useSlots();
+
+const columns = ref("");
+const gridTemplateCols = ref("");
+
+onUpdated(() => {
+  columns.value = slots.action
+    ? props.headers.length + 1
+    : props.headers.length;
+  gridTemplateCols.value = `repeat(${columns.value}, auto)`;
+});
 </script>
 
 <template>
   <table
-    class="text-sm text-left text-gray-500 border-collapse w-auto shadow-md sm:rounded-lg grid overflow-x-auto"
-    :class="`grid-cols-[repeat(${headers.length + 1},_auto)]`"
+    class="text-sm text-left text-gray-500 border-collapse w-auto shadow-md sm:rounded-lg grid overflow-x-auto c-grid-template"
   >
     <thead class="contents">
       <tr class="contents">
@@ -26,10 +41,9 @@ defineProps({
         </th>
 
         <th
+          v-if="columns === headers.length + 1"
           class="px-6 py-3 whitespace-nowrap text-xs text-white uppercase bg-primary-50"
-        >
-          <span class="sr-only">Edit</span>
-        </th>
+        ></th>
       </tr>
     </thead>
     <tbody class="contents">
@@ -42,8 +56,15 @@ defineProps({
           {{ item }}
         </td>
 
-        <td class="px-6 py-4 bg-white border-b hover:bg-gray-50">
-          <a href="#" class="font-medium text-blue-600 hover:underline">
+        <td
+          v-if="columns === headers.length + 1"
+          class="px-6 py-4 bg-white border-b hover:bg-gray-50"
+        >
+          <a
+            @click="$emit(action, row)"
+            href="#"
+            class="font-medium text-blue-600 hover:underline"
+          >
             <slot name="action"></slot>
           </a>
         </td>
@@ -51,3 +72,9 @@ defineProps({
     </tbody>
   </table>
 </template>
+
+<style scoped>
+.c-grid-template {
+  grid-template-columns: v-bind(gridTemplateCols);
+}
+</style>
