@@ -35,5 +35,9 @@ export function useSetForm() {
     });
   };
 
-  return { form, setupInput, resetForm, validateForm };
+  const clearForm = () => {
+    form.value.clear();
+  };
+
+  return { form, setupInput, resetForm, validateForm, clearForm };
 }

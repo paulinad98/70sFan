@@ -7,58 +7,60 @@ import BaseInput from "@/components/base/BaseInput.vue";
 import BaseForm from "@/components/base/BaseForm.vue";
 import BaseTable from "@/components/base/BaseTable.vue";
 
-import { onMounted, ref } from "vue";
+import { defineProps, onMounted, watch } from "vue";
 
 import { useHandleModal } from "@/composables/useHandleModal";
 import { useSetForm } from "@/composables/useSetForm";
 import { useFetchApi } from "@/composables/useFetchApi";
+import {
+  panelForms,
+  tableStructure,
+  usePanelData,
+} from "@/composables/usePanelData";
 
 const { isActive, toggleModal } = useHandleModal();
-
-const { form: teamForm, setupInput, resetForm, validateForm } = useSetForm();
-
-setupInput({
-  name: "teamName",
-  label: "Name",
-  map: teamForm,
-  validators: ["required"],
-});
-setupInput({
-  name: "teamLogoUrl",
-  label: "Logo url",
-  map: teamForm,
-  validators: ["required"],
-});
-
-const teamData = ref([]);
-
-onMounted(async () => {
-  const { data } = await useFetch({
-    method: "GET",
-    endpoint: "team",
-  });
-
-  data.forEach(({ id, name, logoUrl }) => {
-    teamData.value.push([id, name, logoUrl]);
-  });
-});
-
 const { useFetch } = useFetchApi();
+const { form, setupInput, resetForm, validateForm, clearForm } = useSetForm();
+const { data, requests } = usePanelData();
+
+const props = defineProps({ tab: { type: String, default: "team" } });
+
+watch(
+  () => props.tab,
+  () => {
+    clearForm();
+
+    panelForms[`${props.tab}`].forEach(({ name, label, validators }) => {
+      setupInput({
+        name,
+        label,
+        map: form,
+        validators,
+      });
+    });
+  },
+  { immediate: true }
+);
+
+onMounted(() => {
+  Promise.all(requests.map((request) => request()));
+});
 
 const sendForm = async () => {
   const isError = validateForm();
 
-  if (isError) {
-    return;
-  }
+  if (isError) return;
 
-  const name = teamForm.value.get("teamName").value;
-  const logoUrl = teamForm.value.get("teamLogoUrl").value;
+  const body = {};
+
+  form.value.forEach((_value, key) => {
+    body[key] = form.value.get(key).value;
+  });
 
   await useFetch({
     method: "POST",
-    endpoint: "team",
-    payload: { name, logoUrl },
+    endpoint: props.tab,
+    payload: body,
   });
 
   resetForm();
@@ -70,23 +72,19 @@ const sendForm = async () => {
     <panel-sidebar />
     <div class="max-w-full overflow-x-hidden">
       <base-modal v-model="isActive">
-        <template #header>Add team</template>
+        <template #header> Add {{ tab }} </template>
 
         <template #body>
           <base-form @submit="sendForm()">
             <base-input
+              :key="input.name"
+              v-for="input in panelForms[`${props.tab}`]"
               type="text"
-              :label="teamForm.get('teamName').label"
-              :error="teamForm.get('teamName').error"
-              v-model="teamForm.get('teamName').value"
+              :label="form.get(input.name).label"
+              :error="form.get(input.name).error"
+              v-model="form.get(input.name).value"
             ></base-input>
             <br class="my-2.5 block content-['']" />
-            <base-input
-              type="text"
-              :label="teamForm.get('teamLogoUrl').label"
-              :error="teamForm.get('teamLogoUrl').error"
-              v-model="teamForm.get('teamLogoUrl').value"
-            ></base-input>
           </base-form>
         </template>
 
@@ -103,7 +101,7 @@ const sendForm = async () => {
       <header class="flex items-center gap-7 mb-5">
         <h1 class="text-2xl text-gray-900 font-medium">
           Panel -
-          <span class="capitalize">{{ $route.params.tab || "Teams" }}</span>
+          <span class="capitalize">{{ tab || "Team" }}</span>
         </h1>
         <base-button
           @click="toggleModal()"
@@ -113,7 +111,7 @@ const sendForm = async () => {
         </base-button>
       </header>
 
-      <base-table :headers="['ID', 'NAME', 'URL']" :rows="teamData" />
+      <base-table :headers="tableStructure[tab]" :rows="data[`${props.tab}`]" />
     </div>
   </div>
 </template>

@@ -13,14 +13,14 @@ import PanelSidebarLink from "@/components/panel/PanelSidebarLink.vue";
         Admin Panel
       </span>
       <ul class="mt-3 pt-2">
-        <panel-sidebar-link tab="teams" default>
+        <panel-sidebar-link tab="team" default>
           <template #icon>
             <team-icon class="w-6 h-6 pl-1 text-primary-50" />
           </template>
           <template #text> Teams </template>
         </panel-sidebar-link>
 
-        <panel-sidebar-link tab="games">
+        <panel-sidebar-link tab="game">
           <template #icon>
             <game-icon class="w-7 h-7 text-primary-50" />
           </template>
