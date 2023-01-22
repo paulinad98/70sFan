@@ -26,6 +26,12 @@ defineProps({
 defineEmits(["update:modelValue"]);
 </script>
 
+<script>
+export default {
+  inheritAttrs: false,
+};
+</script>
+
 <template>
   <label :for="id" class="block mb-2 text-sm font-medium text-gray-900">
     {{ label }}
@@ -37,8 +43,8 @@ defineEmits(["update:modelValue"]);
     :value="modelValue"
     @input="$emit('update:modelValue', $event.target.value)"
     class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-    v-bind="$attrs"
   >
+    <option value="">{{ label }}</option>
     <option
       :key="`select-${id}-option-${i}`"
       v-for="(option, i) in options"

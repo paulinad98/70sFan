@@ -3,34 +3,36 @@ import PanelSidebar from "@/components/panel/PanelSidebar.vue";
 import BaseButton from "@/components/base/BaseButton.vue";
 import BaseModal from "@/components/base/BaseModal.vue";
 import PlusIcon from "@/components/icons/PlusIcon.vue";
-import BaseInput from "@/components/base/BaseInput.vue";
 import BaseForm from "@/components/base/BaseForm.vue";
 import BaseTable from "@/components/base/BaseTable.vue";
+import BaseSelect from "@/components/base/BaseSelect.vue";
+import BaseInput from "@/components/base/BaseInput.vue";
 
 import { defineProps, onMounted, watch } from "vue";
 
 import { useHandleModal } from "@/composables/useHandleModal";
 import { useSetForm } from "@/composables/useSetForm";
 import { useFetchApi } from "@/composables/useFetchApi";
-import {
-  panelForms,
-  tableStructure,
-  usePanelData,
-} from "@/composables/usePanelData";
+import { tableStructure, usePanelData } from "@/composables/usePanelData";
 
 const { isActive, toggleModal } = useHandleModal();
 const { useFetch } = useFetchApi();
 const { form, setupInput, resetForm, validateForm, clearForm } = useSetForm();
-const { data, requests } = usePanelData();
+const { data, requests, panelForms } = usePanelData();
 
 const props = defineProps({ tab: { type: String, default: "team" } });
+
+const components = {
+  BaseInput,
+  BaseSelect,
+};
 
 watch(
   () => props.tab,
   () => {
     clearForm();
 
-    panelForms[`${props.tab}`].forEach(({ name, label, validators }) => {
+    panelForms.value[`${props.tab}`].forEach(({ name, label, validators }) => {
       setupInput({
         name,
         label,
@@ -80,12 +82,14 @@ const sendForm = async () => {
               :key="input.name"
               v-for="input in panelForms[`${props.tab}`]"
             >
-              <base-input
+              <component
+                :is="components[input.component || 'BaseInput']"
                 :type="input.type || 'text'"
                 :label="form.get(input.name).label"
                 :error="form.get(input.name).error"
                 v-model="form.get(input.name).value"
-              ></base-input>
+                :options="input.options"
+              ></component>
               <br class="my-2.5 block content-['']" />
             </template>
           </base-form>
