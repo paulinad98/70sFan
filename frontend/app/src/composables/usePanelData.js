@@ -91,14 +91,14 @@ export function usePanelData() {
       return { value, label };
     });
 
-    panelForms.value.game[2] = {
-      ...panelForms.value.game[2],
+    panelForms.value.game[1] = {
+      ...panelForms.value.game[1],
       options,
       component: "BaseSelect",
     };
 
-    panelForms.value.game[3] = {
-      ...panelForms.value.game[3],
+    panelForms.value.game[2] = {
+      ...panelForms.value.game[2],
       options,
       component: "BaseSelect",
     };
@@ -130,10 +130,10 @@ export function usePanelData() {
 
       data.value["game"].push([
         game.id,
-        game.homeTeamScore,
         homeTeamName,
-        game.awayTeamScore,
         awayTeamName,
+        game.homeTeamScore,
+        game.awayTeamScore,
         game.season,
         game.gameUrl,
         game.basketballReferenceUrl,
