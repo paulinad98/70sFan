@@ -78,6 +78,7 @@ const gameDataForm = [
   {
     name: "gameDate",
     label: "Date",
+    type: "date",
     validators: ["required"],
   },
   {

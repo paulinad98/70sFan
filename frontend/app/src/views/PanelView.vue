@@ -76,15 +76,18 @@ const sendForm = async () => {
 
         <template #body>
           <base-form @submit="sendForm()">
-            <base-input
+            <template
               :key="input.name"
               v-for="input in panelForms[`${props.tab}`]"
-              type="text"
-              :label="form.get(input.name).label"
-              :error="form.get(input.name).error"
-              v-model="form.get(input.name).value"
-            ></base-input>
-            <br class="my-2.5 block content-['']" />
+            >
+              <base-input
+                :type="input.type || 'text'"
+                :label="form.get(input.name).label"
+                :error="form.get(input.name).error"
+                v-model="form.get(input.name).value"
+              ></base-input>
+              <br class="my-2.5 block content-['']" />
+            </template>
           </base-form>
         </template>
 
