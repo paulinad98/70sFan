@@ -32,14 +32,16 @@ watch(
   () => {
     clearForm();
 
-    panelForms.value[`${props.tab}`].forEach(({ name, label, validators }) => {
-      setupInput({
-        name,
-        label,
-        map: form,
-        validators,
-      });
-    });
+    panelForms.value[`${props.tab}`].data.forEach(
+      ({ name, label, validators }) => {
+        setupInput({
+          name,
+          label,
+          map: form,
+          validators,
+        });
+      }
+    );
   },
   { immediate: true }
 );
@@ -59,11 +61,13 @@ const sendForm = async () => {
     body[key] = form.value.get(key).value;
   });
 
-  await useFetch({
+  const { data } = await useFetch({
     method: "POST",
     endpoint: props.tab,
     payload: body,
   });
+
+  panelForms.value[`${props.tab}`].add(data);
 
   resetForm();
 };
@@ -80,7 +84,7 @@ const sendForm = async () => {
           <base-form @submit="sendForm()">
             <template
               :key="input.name"
-              v-for="input in panelForms[`${props.tab}`]"
+              v-for="input in panelForms[`${props.tab}`].data"
             >
               <component
                 :is="components[input.component || 'BaseInput']"

@@ -82,8 +82,30 @@ export function usePanelData() {
   const { useFetch } = useFetchApi();
 
   const data = ref({ team: [], game: [] });
-  const panelForms = ref({ team: teamDataForm, game: gameDataForm });
+  const panelForms = ref({
+    team: { data: teamDataForm },
+    game: { data: gameDataForm, add: addGame },
+  });
 
+  function addGame(game) {
+    const { awayTeamId, homeTeamId } = game;
+
+    const awayTeamName = game.teams.find((team) => team.id === awayTeamId).name;
+
+    const homeTeamName = game.teams.find((team) => team.id === homeTeamId).name;
+
+    data.value["game"].push([
+      game.id,
+      homeTeamName,
+      awayTeamName,
+      game.homeTeamScore,
+      game.awayTeamScore,
+      game.season,
+      game.gameUrl,
+      game.basketballReferenceUrl,
+      game.description,
+    ]);
+  }
   const requests = [setTeamData, setGameData];
 
   const setOptionsTeams = () => {
@@ -91,14 +113,14 @@ export function usePanelData() {
       return { value, label };
     });
 
-    panelForms.value.game[1] = {
-      ...panelForms.value.game[1],
+    panelForms.value.game.data[2] = {
+      ...panelForms.value.game.data[2],
       options,
       component: "BaseSelect",
     };
 
-    panelForms.value.game[2] = {
-      ...panelForms.value.game[2],
+    panelForms.value.game.data[3] = {
+      ...panelForms.value.game.data[3],
       options,
       component: "BaseSelect",
     };
@@ -118,27 +140,7 @@ export function usePanelData() {
     const { data: games } = await useFetch({ method: "GET", endpoint: "game" });
 
     games.forEach((game) => {
-      const { awayTeamId, homeTeamId } = game;
-
-      const awayTeamName = game.teams.find(
-        (team) => team.id === awayTeamId
-      ).name;
-
-      const homeTeamName = game.teams.find(
-        (team) => team.id === homeTeamId
-      ).name;
-
-      data.value["game"].push([
-        game.id,
-        homeTeamName,
-        awayTeamName,
-        game.homeTeamScore,
-        game.awayTeamScore,
-        game.season,
-        game.gameUrl,
-        game.basketballReferenceUrl,
-        game.description,
-      ]);
+      addGame(game);
     });
   }
 
