@@ -112,15 +112,15 @@ const sendForm = async () => {
   <panel-layout tab="game">
     <template #modal>
       <base-form @submit="sendForm()">
-        <base-input
-          :key="`input-${input.name}`"
-          v-for="input in inputs"
-          :type="input.type || 'text'"
-          :label="gameForm.get(`${input.name}`).label"
-          :error="gameForm.get(`${input.name}`).error"
-          v-model="gameForm.get(`${input.name}`).value"
-        ></base-input>
-        <br class="my-2.5 block content-['']" />
+        <template :key="`input-${input.name}`" v-for="input in inputs">
+          <base-input
+            :type="input.type || 'text'"
+            :label="gameForm.get(`${input.name}`).label"
+            :error="gameForm.get(`${input.name}`).error"
+            v-model="gameForm.get(`${input.name}`).value"
+          ></base-input>
+          <br class="my-2.5 block content-['']" />
+        </template>
       </base-form>
     </template>
     <template #table>
