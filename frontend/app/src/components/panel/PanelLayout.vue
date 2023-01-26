@@ -10,7 +10,7 @@ import { defineProps } from "vue";
 
 const { isActive, toggleModal } = useHandleModal();
 
-defineProps({ tab: { type: String, default: "team" } });
+defineProps(["tab"]);
 </script>
 
 <template>

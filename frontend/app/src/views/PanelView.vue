@@ -4,7 +4,7 @@ import PanelGame from "@/components/panel/PanelGame.vue";
 
 import { defineProps } from "vue";
 
-defineProps({ tab: { type: String, default: "team" } });
+defineProps(["tab"]);
 
 const components = {
   team: PanelTeam,

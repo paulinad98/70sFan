@@ -109,7 +109,7 @@ const sendForm = async () => {
 </script>
 
 <template>
-  <panel-layout>
+  <panel-layout tab="game">
     <template #modal>
       <base-form @submit="sendForm()">
         <base-input

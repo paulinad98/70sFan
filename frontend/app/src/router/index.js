@@ -12,7 +12,7 @@ const router = createRouter({
     {
       path: "/panel/:tab?",
       name: "Panel",
-      props: true,
+      props: (route) => ({ tab: route.params.tab || "team" }),
       component: () => import("../views/PanelView.vue"),
     },
   ],
