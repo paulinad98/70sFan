@@ -5,13 +5,14 @@ import BaseForm from "@/components/base/BaseForm.vue";
 
 import PanelLayout from "@/components/panel/PanelLayout.vue";
 
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 
 import { useSetForm } from "@/composables/useSetForm";
-import { useFetchApi } from "@/composables/useFetchApi";
+import { useTeamStore } from "@/stores/team";
 
 const { form: teamForm, setupInput, resetForm, validateForm } = useSetForm();
-const { useFetch } = useFetchApi();
+
+const storeTeam = useTeamStore();
 
 const inputs = [
   {
@@ -26,8 +27,6 @@ const inputs = [
   },
 ];
 
-const teamData = ref([]);
-
 inputs.forEach(({ name, label, validators }) => {
   setupInput({
     name,
@@ -38,13 +37,7 @@ inputs.forEach(({ name, label, validators }) => {
 });
 
 onMounted(async () => {
-  const { data } = await useFetch({
-    method: "GET",
-    endpoint: "team",
-  });
-  data.forEach(({ id, name, logoUrl }) => {
-    teamData.value.push([id, name, logoUrl]);
-  });
+  storeTeam.getTeams();
 });
 
 const sendForm = async () => {
@@ -55,11 +48,8 @@ const sendForm = async () => {
   const name = teamForm.value.get("teamName").value;
   const logoUrl = teamForm.value.get("teamLogoUrl").value;
 
-  await useFetch({
-    method: "POST",
-    endpoint: "team",
-    payload: { name, logoUrl },
-  });
+  storeTeam.postTeam({ name, logoUrl });
+
   resetForm();
 };
 </script>
@@ -86,7 +76,7 @@ const sendForm = async () => {
     <template #table>
       <base-table
         :headers="['ID', 'NAME', 'URL']"
-        :rows="teamData"
+        :rows="storeTeam.teamData"
       ></base-table>
     </template>
   </panel-layout>
