@@ -39,7 +39,7 @@ exports.postGame = async (req, res, next) => {
 
     [homeTeam, awayTeam] = await Promise.all([homeTeam, awayTeam]);
 
-    return res.status(201).send({ message: "Game created" });
+    return res.status(201).send({ message: "Game created", id: game.id });
   } catch (err) {
     return res.status(500).send(err);
   }
