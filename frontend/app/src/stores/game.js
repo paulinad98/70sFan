@@ -19,10 +19,17 @@ export const useGameStore = defineStore("game", () => {
     });
 
     data.forEach((game) => {
+      const homeTeamName = game.teams.find(
+        (team) => team.id === game.homeTeamId
+      ).name;
+      const awayTeamName = game.teams.find(
+        (team) => team.id === game.awayTeamId
+      ).name;
+
       addGame([
         game.id,
-        game.homeTeamId,
-        game.awayTeamId,
+        homeTeamName,
+        awayTeamName,
         game.homeTeamScore,
         game.awayTeamScore,
         game.season,
