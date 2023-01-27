@@ -5,8 +5,6 @@ import BaseForm from "@/components/base/BaseForm.vue";
 
 import PanelLayout from "@/components/panel/PanelLayout.vue";
 
-import { onMounted } from "vue";
-
 import { useSetForm } from "@/composables/useSetForm";
 import { useTeamStore } from "@/stores/team";
 
@@ -34,10 +32,6 @@ inputs.forEach(({ name, label, validators }) => {
     map: teamForm,
     validators,
   });
-});
-
-onMounted(async () => {
-  storeTeam.getTeams();
 });
 
 const sendForm = async () => {
