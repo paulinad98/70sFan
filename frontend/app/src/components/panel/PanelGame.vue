@@ -2,16 +2,19 @@
 import BaseInput from "@/components/base/BaseInput.vue";
 import BaseTable from "@/components/base/BaseTable.vue";
 import BaseForm from "@/components/base/BaseForm.vue";
+import BaseSelect from "@/components/base/BaseSelect.vue";
 
 import PanelLayout from "@/components/panel/PanelLayout.vue";
 
-import { onMounted, ref } from "vue";
-
 import { useSetForm } from "@/composables/useSetForm";
-import { useFetchApi } from "@/composables/useFetchApi";
+
+import { useTeamStore } from "@/stores/team";
+import { useGameStore } from "@/stores/game";
 
 const { form: gameForm, setupInput, resetForm, validateForm } = useSetForm();
-const { useFetch } = useFetchApi();
+
+const storeTeam = useTeamStore();
+const storeGame = useGameStore();
 
 const inputs = [
   {
@@ -29,11 +32,13 @@ const inputs = [
     name: "homeTeamId",
     label: "homeTeamId",
     validators: [],
+    select: true,
   },
   {
     name: "awayTeamId",
     label: "awayTeamId",
     validators: [],
+    select: true,
   },
   {
     name: "homeTeamScore",
@@ -62,8 +67,6 @@ const inputs = [
   },
 ];
 
-const gameData = ref([]);
-
 inputs.forEach(({ name, label, validators }) => {
   setupInput({
     name,
@@ -73,37 +76,20 @@ inputs.forEach(({ name, label, validators }) => {
   });
 });
 
-onMounted(async () => {
-  const { data } = await useFetch({
-    method: "GET",
-    endpoint: "game",
-  });
-  data.forEach((game) => {
-    gameData.value.push([
-      game.id,
-      game.homeTeamScore,
-      game.awayTeamScore,
-      game.season,
-      game.gameUrl,
-      game.basketballReferenceUrl,
-      game.description,
-    ]);
-  });
-});
-
 const sendForm = async () => {
   const isError = validateForm();
   if (isError) {
     return;
   }
-  const name = gameForm.value.get("gameName").value;
-  const logoUrl = gameForm.value.get("gameLogoUrl").value;
 
-  await useFetch({
-    method: "POST",
-    endpoint: "game",
-    payload: { name, logoUrl },
+  const payload = {};
+
+  inputs.forEach((input) => {
+    payload[input.name] = gameForm.value.get(input.name).value;
   });
+
+  await storeGame.postGame(payload);
+
   resetForm();
 };
 </script>
@@ -113,12 +99,20 @@ const sendForm = async () => {
     <template #modal>
       <base-form @submit="sendForm()">
         <template :key="`input-${input.name}`" v-for="input in inputs">
+          <base-select
+            v-if="input.select"
+            :label="gameForm.get(input.name).label"
+            :error="gameForm.get(input.name).error"
+            v-model="gameForm.get(input.name).value"
+            :options="storeTeam.teamOptions"
+          />
           <base-input
+            v-else
             :type="input.type || 'text'"
             :label="gameForm.get(`${input.name}`).label"
             :error="gameForm.get(`${input.name}`).error"
             v-model="gameForm.get(`${input.name}`).value"
-          ></base-input>
+          />
           <br class="my-2.5 block content-['']" />
         </template>
       </base-form>
@@ -136,7 +130,7 @@ const sendForm = async () => {
           'basketball reference',
           'description',
         ]"
-        :rows="gameData"
+        :rows="storeGame.gameData"
       ></base-table>
     </template>
   </panel-layout>

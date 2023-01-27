@@ -1,4 +1,4 @@
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import { defineStore } from "pinia";
 
 import { useFetchApi } from "@/composables/useFetchApi";
@@ -7,6 +7,10 @@ export const useTeamStore = defineStore("team", () => {
   const { useFetch } = useFetchApi();
 
   const teamData = ref([]);
+
+  const teamOptions = computed(() => {
+    return teamData.value.map(([id, name]) => ({ value: id, label: name }));
+  });
 
   function addTeam(payload) {
     teamData.value.push(payload);
@@ -35,5 +39,5 @@ export const useTeamStore = defineStore("team", () => {
     addTeam([id, name, logoUrl]);
   }
 
-  return { teamData, addTeam, getTeams, postTeam };
+  return { teamData, teamOptions, addTeam, getTeams, postTeam };
 });
