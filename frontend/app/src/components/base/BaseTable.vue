@@ -1,5 +1,5 @@
 <script setup>
-import { ref, useSlots, onUpdated } from "vue";
+import { ref, useSlots, onMounted } from "vue";
 
 const props = defineProps({
   headers: {
@@ -18,7 +18,7 @@ const slots = useSlots();
 const columns = ref("");
 const gridTemplateCols = ref("");
 
-onUpdated(() => {
+onMounted(() => {
   columns.value = slots.action
     ? props.headers.length + 1
     : props.headers.length;
