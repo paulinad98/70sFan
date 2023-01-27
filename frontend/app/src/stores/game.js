@@ -1,10 +1,12 @@
 import { ref } from "vue";
 import { defineStore } from "pinia";
 
+import { useTeamStore } from "@/stores/team";
 import { useFetchApi } from "@/composables/useFetchApi";
 
 export const useGameStore = defineStore("game", () => {
   const { useFetch } = useFetchApi();
+  const storeTeam = useTeamStore();
 
   const gameData = ref([]);
 
@@ -40,45 +42,32 @@ export const useGameStore = defineStore("game", () => {
     });
   }
 
-  async function postGame({
-    date,
-    season,
-    homeTeamScore,
-    awayTeamScore,
-    homeTeamId,
-    awayTeamId,
-    gameUrl,
-    basketballReferenceUrl,
-    description,
-  }) {
+  async function postGame(game) {
     const {
       data: { id },
     } = await useFetch({
       method: "POST",
       endpoint: "game",
-      payload: {
-        date,
-        season,
-        homeTeamScore,
-        awayTeamScore,
-        homeTeamId,
-        awayTeamId,
-        gameUrl,
-        basketballReferenceUrl,
-        description,
-      },
+      payload: { ...game },
     });
+
+    const homeTeamName = storeTeam.teamData.find(
+      (team) => Number(team[0]) === Number(game.homeTeamId)
+    )[1];
+    const awayTeamName = storeTeam.teamData.find(
+      (team) => Number(team[0]) === Number(game.awayTeamId)
+    )[1];
 
     addGame([
       id,
-      homeTeamId,
-      awayTeamId,
-      homeTeamScore,
-      awayTeamScore,
-      season,
-      gameUrl,
-      basketballReferenceUrl,
-      description,
+      homeTeamName,
+      awayTeamName,
+      game.homeTeamScore,
+      game.awayTeamScore,
+      game.season,
+      game.gameUrl,
+      game.basketballReferenceUrl,
+      game.description,
     ]);
   }
 
