@@ -10,11 +10,14 @@ import { useSetForm } from "@/composables/useSetForm";
 
 import { useTeamStore } from "@/stores/team";
 import { useGameStore } from "@/stores/game";
-
-const { form: gameForm, setupInput, resetForm, validateForm } = useSetForm();
+import { useQuery } from "vue-query";
 
 const storeTeam = useTeamStore();
 const storeGame = useGameStore();
+
+const { isLoading } = useQuery("games", storeGame.getGames);
+
+const { form: gameForm, setupInput, resetForm, validateForm } = useSetForm();
 
 const inputs = [
   {
@@ -131,6 +134,7 @@ const sendForm = async () => {
           'description',
         ]"
         :rows="storeGame.gameData"
+        :isLoading="isLoading"
       ></base-table>
     </template>
   </panel-layout>

@@ -7,10 +7,13 @@ import PanelLayout from "@/components/panel/PanelLayout.vue";
 
 import { useSetForm } from "@/composables/useSetForm";
 import { useTeamStore } from "@/stores/team";
-
-const { form: teamForm, setupInput, resetForm, validateForm } = useSetForm();
+import { useQuery } from "vue-query";
 
 const storeTeam = useTeamStore();
+
+const { isLoading } = useQuery("teams", storeTeam.getTeams);
+
+const { form: teamForm, setupInput, resetForm, validateForm } = useSetForm();
 
 const inputs = [
   {
@@ -71,6 +74,7 @@ const sendForm = async () => {
       <base-table
         :headers="['ID', 'NAME', 'URL']"
         :rows="storeTeam.teamData"
+        :isLoading="isLoading"
       ></base-table>
     </template>
   </panel-layout>
