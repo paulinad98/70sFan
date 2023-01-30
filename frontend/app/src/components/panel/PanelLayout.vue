@@ -16,7 +16,7 @@ defineProps(["tab"]);
 <template>
   <div class="grid grid-cols-[256px_1fr] gap-14 items-start overflow-x-hidden">
     <panel-sidebar />
-    <div class="max-w-full overflow-x-hidden">
+    <div class="max-w-full overflow-x-hidden py-4">
       <base-modal v-model="isActive">
         <template #header> Add {{ tab }} </template>
 
