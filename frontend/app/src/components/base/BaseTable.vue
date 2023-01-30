@@ -1,4 +1,6 @@
 <script setup>
+import BaseSpinner from "@/components/base/BaseSpinner.vue";
+
 import { ref, useSlots, onMounted } from "vue";
 
 const props = defineProps({
@@ -8,6 +10,10 @@ const props = defineProps({
   rows: {
     type: Array,
     required: true,
+  },
+  isLoading: {
+    type: Boolean,
+    default: false,
   },
 });
 
@@ -27,7 +33,9 @@ onMounted(() => {
 </script>
 
 <template>
+  <base-spinner v-if="isLoading" class="flex justify-center mt-2.5" />
   <table
+    v-else
     class="text-sm text-left text-gray-500 border-collapse w-auto shadow-md sm:rounded-lg grid overflow-x-auto c-grid-template"
   >
     <thead class="contents">
