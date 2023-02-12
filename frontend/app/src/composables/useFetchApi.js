@@ -2,6 +2,14 @@ const API_URL = import.meta.env.VITE_API_URL;
 const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 
 export function useFetchApi() {
+  function setQuery(payload) {
+    const query = Object.keys(payload)
+      .map((key) => `${key}=${payload[key]}`)
+      .join("&");
+
+    return query;
+  }
+
   const useFetch = async ({ method = "GET", payload = {}, endpoint = "" }) => {
     const body = method !== "GET" && JSON.stringify(payload);
     const options = {
@@ -27,5 +35,5 @@ export function useFetchApi() {
     }
   };
 
-  return { useFetch };
+  return { useFetch, setQuery };
 }

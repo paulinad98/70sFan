@@ -9,7 +9,7 @@ import { useFetchApi } from "@/composables/useFetchApi";
 
 import { useSetForm } from "@/composables/useSetForm";
 
-const { useFetch } = useFetchApi();
+const { useFetch, setQuery } = useFetchApi();
 
 const storeTeam = useTeamStore();
 useQuery("teams", storeTeam.getTeams);
@@ -59,9 +59,7 @@ const sendForm = async () => {
     }
   });
 
-  const query = Object.keys(payload)
-    .map((key) => `${key}=${payload[key]}`)
-    .join("&");
+  const query = setQuery(payload);
 
   const { data } = await useFetch({
     method: "GET",
