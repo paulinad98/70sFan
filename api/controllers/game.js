@@ -46,7 +46,7 @@ exports.postGame = async (req, res, next) => {
 };
 
 exports.getGames = async (req, res, next) => {
-  const { season, homeTeamId, awayTeamId } = req.body;
+  const { season, homeTeamId, awayTeamId } = req.query;
 
   let conditions = [{ season }, { homeTeamId }, { awayTeamId }];
 
