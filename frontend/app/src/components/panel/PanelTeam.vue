@@ -13,16 +13,22 @@ const storeTeam = useTeamStore();
 
 const { isLoading } = useQuery("teams", storeTeam.getTeams);
 
-const { form: teamForm, setupInput, resetForm, validateForm } = useSetForm();
+const {
+  form: teamForm,
+  setupInput,
+  resetForm,
+  validateForm,
+  getPayloadFrom,
+} = useSetForm();
 
 const inputs = [
   {
-    name: "teamName",
+    name: "name",
     label: "Name",
     validators: ["required"],
   },
   {
-    name: "teamLogoUrl",
+    name: "logoUrl",
     label: "Logo url",
     validators: ["required"],
   },
@@ -42,10 +48,10 @@ const sendForm = async () => {
   if (isError) {
     return;
   }
-  const name = teamForm.value.get("teamName").value;
-  const logoUrl = teamForm.value.get("teamLogoUrl").value;
 
-  storeTeam.postTeam({ name, logoUrl });
+  const payload = getPayloadFrom();
+
+  storeTeam.postTeam(payload);
 
   resetForm();
 };
@@ -57,16 +63,16 @@ const sendForm = async () => {
       <base-form @submit="sendForm()">
         <base-input
           type="text"
-          :label="teamForm.get('teamName').label"
-          :error="teamForm.get('teamName').error"
-          v-model="teamForm.get('teamName').value"
+          :label="teamForm.get('name').label"
+          :error="teamForm.get('name').error"
+          v-model="teamForm.get('name').value"
         ></base-input>
         <br class="my-2.5 block content-['']" />
         <base-input
           type="text"
-          :label="teamForm.get('teamLogoUrl').label"
-          :error="teamForm.get('teamLogoUrl').error"
-          v-model="teamForm.get('teamLogoUrl').value"
+          :label="teamForm.get('logoUrl').label"
+          :error="teamForm.get('logoUrl').error"
+          v-model="teamForm.get('logoUrl').value"
         ></base-input>
       </base-form>
     </template>

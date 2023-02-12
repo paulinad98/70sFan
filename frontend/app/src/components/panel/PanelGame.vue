@@ -17,7 +17,13 @@ const storeGame = useGameStore();
 
 const { isLoading } = useQuery("games", storeGame.getGames);
 
-const { form: gameForm, setupInput, resetForm, validateForm } = useSetForm();
+const {
+  form: gameForm,
+  setupInput,
+  resetForm,
+  validateForm,
+  getPayloadFrom,
+} = useSetForm();
 
 const inputs = [
   {
@@ -85,11 +91,7 @@ const sendForm = async () => {
     return;
   }
 
-  const payload = {};
-
-  inputs.forEach((input) => {
-    payload[input.name] = gameForm.value.get(input.name).value;
-  });
+  const payload = getPayloadFrom();
 
   await storeGame.postGame(payload);
 

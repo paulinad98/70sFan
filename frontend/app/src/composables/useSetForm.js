@@ -39,5 +39,24 @@ export function useSetForm() {
     form.value.clear();
   };
 
-  return { form, setupInput, resetForm, validateForm, clearForm };
+  const getPayloadFrom = () => {
+    const payload = {};
+
+    form.value.forEach((input, key) => {
+      if (input.value) {
+        payload[key] = input.value;
+      }
+    });
+
+    return payload;
+  };
+
+  return {
+    form,
+    setupInput,
+    resetForm,
+    validateForm,
+    clearForm,
+    getPayloadFrom,
+  };
 }

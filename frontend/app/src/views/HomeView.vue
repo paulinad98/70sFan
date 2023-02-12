@@ -14,7 +14,13 @@ const { useFetch, setQuery } = useFetchApi();
 const storeTeam = useTeamStore();
 useQuery("teams", storeTeam.getTeams);
 
-const { form: searchForm, setupInput, resetForm, validateForm } = useSetForm();
+const {
+  form: searchForm,
+  setupInput,
+  resetForm,
+  validateForm,
+  getPayloadFrom,
+} = useSetForm();
 
 const inputs = [
   {
@@ -51,13 +57,7 @@ const sendForm = async () => {
     return;
   }
 
-  const payload = {};
-
-  inputs.forEach((input) => {
-    if (searchForm.value.get(input.name).value) {
-      payload[input.name] = searchForm.value.get(input.name).value;
-    }
-  });
+  const payload = getPayloadFrom();
 
   const query = setQuery(payload);
 
