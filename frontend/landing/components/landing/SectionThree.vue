@@ -1,7 +1,7 @@
 <template>
   <section class="bg-primary-50">
     <div
-      class="items-center max-w-screen-xl px-4 py-8 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-16 xl:gap-24 lg:py-24 lg:px-6"
+      class="items-center max-w-screen-2xl px-4 py-8 mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-16 xl:gap-24 lg:py-24 lg:px-6"
     >
       <div class="flex flex-col items-center">
         <breakdowns class="w-10 h-10 mb-2 md:w-12 md:h-12 text-gray-200" />

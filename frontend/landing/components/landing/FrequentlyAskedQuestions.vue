@@ -1,6 +1,6 @@
 <template>
   <section class="bg-white dark:bg-gray-900">
-    <div class="max-w-screen-xl px-4 pb-8 mx-auto lg:pb-24 lg:px-6">
+    <div class="max-w-screen-2xl px-4 pb-8 mx-auto lg:pb-24 lg:px-6">
       <h2
         class="mb-6 text-3xl font-extrabold tracking-tight text-center text-gray-900 lg:mb-8 lg:text-3xl dark:text-white"
       >

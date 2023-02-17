@@ -1,7 +1,7 @@
 <template>
   <section>
     <div
-      class="max-w-screen-xl px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:py-24 lg:px-6"
+      class="max-w-screen-2xl px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:py-24 lg:px-6"
     >
       <div class="items-center gap-8 lg:grid lg:grid-cols-2 xl:gap-16">
         <img

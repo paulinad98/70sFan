@@ -1,6 +1,8 @@
 <template>
   <section>
-    <div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-24 lg:px-6">
+    <div
+      class="max-w-screen-2xl px-4 py-8 mx-auto text-center lg:py-24 lg:px-6"
+    >
       <figure class="max-w-screen-md mx-auto">
         <svg
           class="h-12 mx-auto mb-3 text-purple-700"
