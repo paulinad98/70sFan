@@ -19,7 +19,7 @@ export default defineComponent({
   <div class="bg-primary-300 min-h-screen flex flex-col justify-between">
     <app-navigation />
     <div>
-      <RouterView class="pt-28 px-10 xl:px-0 max-w-screen-2xl mx-auto" />
+      <RouterView class="pt-28 px-10 2xl:px-5 max-w-screen-2xl mx-auto" />
     </div>
     <app-footer />
   </div>
