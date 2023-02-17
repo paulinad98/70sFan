@@ -82,7 +82,7 @@ const sendForm = async () => {
 </script>
 
 <template>
-  <div class="grid grid-cols-[448px_auto] gap-14">
+  <div class="grid grid-cols-[250px_auto] gap-14">
     <base-form @submit="sendForm()">
       <template :key="`input-${input.name}`" v-for="input in inputs">
         <base-select
@@ -103,7 +103,7 @@ const sendForm = async () => {
       </template>
     </base-form>
 
-    <main class="grid grid-cols-[repeat(auto-fit,_448px)] gap-10">
+    <main class="grid grid-cols-[repeat(auto-fill,_minmax(330px,_1fr))] gap-10">
       <game-preview :key="game.id" v-for="game in games" :game="game" />
     </main>
   </div>

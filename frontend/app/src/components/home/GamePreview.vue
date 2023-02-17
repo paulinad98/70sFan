@@ -12,7 +12,7 @@ const awayTeam = props.game.teams.find(
 </script>
 
 <template>
-  <div class="max-w-md p-5 border-2 border-gray-700 rounded-md shadow-lg">
+  <div class="p-5 border-2 border-gray-700 rounded-md shadow-lg">
     <div
       class="grid grid-cols-[112px_auto_112px] grid-rows-[repeat(2,_auto)] justify-items-center items-center mb-5 mx-auto"
     >
@@ -75,14 +75,15 @@ const awayTeam = props.game.teams.find(
     <p class="mb-4 text-sm leading-normal">
       {{ game.description }}
     </p>
-    <iframe
-      width="408"
-      height="245"
-      :src="game.gameUrl"
-      title="YouTube video player"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-      allowfullscreen
-    ></iframe>
+    <div class="relative">
+      <iframe
+        class="w-full h-56"
+        :src="game.gameUrl"
+        title="YouTube video player"
+        frameborder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+      ></iframe>
+    </div>
   </div>
 </template>
