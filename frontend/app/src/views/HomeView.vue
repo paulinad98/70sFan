@@ -5,7 +5,7 @@ import BaseForm from "@/components/base/BaseForm.vue";
 
 import GamePreview from "@/components/home/GamePreview.vue";
 
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 
 import { useTeamStore } from "@/stores/team";
 import { useQuery } from "vue-query";
@@ -19,6 +19,9 @@ const storeTeam = useTeamStore();
 useQuery("teams", storeTeam.getTeams);
 
 const games = ref([]);
+onMounted(() => {
+  sendForm();
+});
 
 const {
   form: searchForm,
@@ -101,12 +104,7 @@ const sendForm = async () => {
     </base-form>
 
     <main class="grid grid-cols-[repeat(auto-fit,_448px)] gap-10">
-      <game-preview />
-      <game-preview />
-      <game-preview />
-      <game-preview />
-      <game-preview />
-      <game-preview />
+      <game-preview :key="game.id" v-for="game in games" :game="game" />
     </main>
   </div>
 </template>
