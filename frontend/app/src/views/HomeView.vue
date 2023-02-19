@@ -2,6 +2,7 @@
 import BaseSelect from "@/components/base/BaseSelect.vue";
 import BaseInput from "@/components/base/BaseInput.vue";
 import BaseForm from "@/components/base/BaseForm.vue";
+import BasePagination from "@/components/base/BasePagination.vue";
 
 import GamePreview from "@/components/home/GamePreview.vue";
 
@@ -19,6 +20,8 @@ const storeTeam = useTeamStore();
 useQuery("teams", storeTeam.getTeams);
 
 const games = ref([]);
+const currentPage = ref(1);
+const meta = ref({});
 onMounted(() => {
   sendForm();
 });
@@ -26,7 +29,6 @@ onMounted(() => {
 const {
   form: searchForm,
   setupInput,
-  resetForm,
   validateForm,
   getPayloadFrom,
 } = useSetForm();
@@ -68,16 +70,15 @@ const sendForm = async () => {
 
   const payload = getPayloadFrom();
 
-  const query = setQuery(payload);
+  const query = setQuery({ ...payload, page: currentPage.value });
 
   const { data } = await useFetch({
     method: "GET",
     endpoint: `game?${query}`,
   });
 
-  games.value = data;
-
-  resetForm();
+  games.value = data.games;
+  meta.value = data.meta;
 };
 </script>
 
@@ -103,8 +104,19 @@ const sendForm = async () => {
       </template>
     </base-form>
 
-    <main class="grid grid-cols-[repeat(auto-fill,_minmax(330px,_1fr))] gap-10">
-      <game-preview :key="game.id" v-for="game in games" :game="game" />
+    <main>
+      <div
+        class="grid grid-cols-[repeat(auto-fill,_minmax(330px,_1fr))] gap-10"
+      >
+        <game-preview :key="game.id" v-for="game in games" :game="game" />
+      </div>
+      <base-pagination
+        class="text-center mt-8"
+        @change="sendForm()"
+        v-if="meta.lastPage"
+        v-model="currentPage"
+        :lastPage="meta.lastPage"
+      />
     </main>
   </div>
 </template>
