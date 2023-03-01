@@ -2,16 +2,22 @@ const { Op } = require("sequelize");
 
 const Game = require("../models/game");
 const TeamGames = require("../models/teamGames");
+const SeasonGames = require("../models/seasonGames");
 const Team = require("../models/team");
+const Season = require("../models/season");
 
 const createTeamGames = (gameId, teamId) => {
   return TeamGames.create({ gameId, teamId });
 };
 
+const createSeasonGames = (gameId, teamId) => {
+  return SeasonGames.create({ gameId, seasonId });
+};
+
 exports.postGame = async (req, res, next) => {
   const {
     date,
-    season,
+    seasonId,
     homeTeamScore,
     awayTeamScore,
     homeTeamId,
@@ -36,8 +42,9 @@ exports.postGame = async (req, res, next) => {
 
     let homeTeam = createTeamGames(game.id, homeTeamId);
     let awayTeam = createTeamGames(game.id, awayTeamId);
+    let season = createSeasonGames(game.id, seasonId);
 
-    [homeTeam, awayTeam] = await Promise.all([homeTeam, awayTeam]);
+    await Promise.all([homeTeam, awayTeam, season]);
 
     return res.status(201).send({ message: "Game created", id: game.id });
   } catch (err) {

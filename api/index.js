@@ -7,11 +7,14 @@ const sequelize = require("./util/database");
 const Patreon = require("./models/patreon");
 const Team = require("./models/team");
 const Game = require("./models/game");
+const Season = require("./models/season");
 const TeamGames = require("./models/teamGames");
+const SeasonGames = require("./models/seasonGames");
 
 const oauthRoutes = require("./routes/oauth");
 const gameRoutes = require("./routes/game");
 const teamRoutes = require("./routes/team");
+const seasonRoutes = require("./routes/season");
 
 const app = express();
 
@@ -37,11 +40,15 @@ app.get("/", (req, res) => {
 app.use("/oauth", oauthRoutes);
 app.use("/game", gameRoutes);
 app.use("/team", teamRoutes);
+app.use("/season", seasonRoutes);
 
 const startServer = async () => {
   try {
     Game.belongsToMany(Team, { through: "TeamGames" });
     Team.belongsToMany(Game, { through: "TeamGames" });
+
+    Game.belongsToMany(Season, { through: "SeasonGames" });
+    Season.belongsToMany(Game, { through: "SeasonGames" });
 
     await sequelize.sync();
     app.listen(5000, () => {

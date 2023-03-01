@@ -10,14 +10,24 @@ const Game = sequelize.define("game", {
     autoIncrement: true,
   },
   date: { type: Sequelize.DATE, allowNull: false },
-  season: { type: Sequelize.STRING, allowNull: false },
+  seasonId: { type: Sequelize.INTEGER, allowNull: false },
   homeTeamId: { type: Sequelize.INTEGER, allowNull: false },
   awayTeamId: { type: Sequelize.INTEGER, allowNull: false },
   homeTeamScore: { type: Sequelize.INTEGER, allowNull: false },
   awayTeamScore: { type: Sequelize.INTEGER, allowNull: false },
-  gameUrl: { type: Sequelize.STRING, allowNull: false },
+  gameUrl: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    get() {
+      return this.getDataValue("gameUrl").split(";");
+    },
+    set(val) {
+      this.setDataValue("gameUrl", val.join(";"));
+    },
+  },
   basketballReferenceUrl: { type: Sequelize.STRING, allowNull: false },
   description: { type: Sequelize.STRING, allowNull: true },
+  seasonPhase: { type: Sequelize.STRING, allowNull: false },
 });
 
 module.exports = Game;
