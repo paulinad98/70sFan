@@ -1,18 +1,7 @@
-<script>
-import { defineComponent } from "vue";
-import { RouterView } from "vue-router";
-
+<script setup>
 import AppFooter from "../../globalComponents/app/AppFooter.vue";
 import AppNavigation from "../../globalComponents/app/AppNavigation.vue";
-
-export default defineComponent({
-  name: "App",
-  components: {
-    RouterView,
-    AppFooter,
-    AppNavigation,
-  },
-});
+import { RouterView } from "vue-router";
 </script>
 
 <template>
