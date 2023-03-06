@@ -10,14 +10,15 @@ const createTeamGames = (gameId, teamId) => {
   return TeamGames.create({ gameId, teamId });
 };
 
-const createSeasonGames = (gameId, teamId) => {
+const createSeasonGames = (gameId, seasonId) => {
   return SeasonGames.create({ gameId, seasonId });
 };
 
 exports.postGame = async (req, res, next) => {
-  const {
+  let {
     date,
     seasonId,
+    season,
     homeTeamScore,
     awayTeamScore,
     homeTeamId,
@@ -25,29 +26,37 @@ exports.postGame = async (req, res, next) => {
     gameUrl,
     basketballReferenceUrl,
     description,
+    seasonPhase,
   } = req.body;
+
+  if (!seasonId && season) {
+    const seasonObject = await Season.create({ years: season });
+    seasonId = seasonObject.id;
+  }
 
   try {
     const game = await Game.create({
       date,
-      season,
+      seasonId,
       homeTeamScore,
       awayTeamScore,
       homeTeamId,
       awayTeamId,
-      gameUrl,
+      gameUrl: gameUrl.split(";"),
       basketballReferenceUrl,
       description,
+      seasonPhase: "regular",
     });
 
     let homeTeam = createTeamGames(game.id, homeTeamId);
     let awayTeam = createTeamGames(game.id, awayTeamId);
-    let season = createSeasonGames(game.id, seasonId);
+    let seasonGames = createSeasonGames(game.id, seasonId);
 
-    await Promise.all([homeTeam, awayTeam, season]);
+    await Promise.all([homeTeam, awayTeam, seasonGames]);
 
     return res.status(201).send({ message: "Game created", id: game.id });
   } catch (err) {
+    console.log(err);
     return res.status(500).send(err);
   }
 };

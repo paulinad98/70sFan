@@ -1,13 +1,10 @@
 const Season = require("../models/season");
 
 exports.postSeason = async (req, res, next) => {
-  const { years, phase } = req.body;
+  const { years } = req.body;
 
   try {
-    const season = await Season.create({
-      years,
-      phase,
-    });
+    const season = await Season.create({ years });
 
     return res.status(201).send({ message: "Season created", id: season.id });
   } catch (err) {
