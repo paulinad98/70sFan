@@ -17,6 +17,8 @@ export const useSeasonStore = defineStore("season", () => {
   }
 
   async function getSeasons() {
+    if (seasonData.value.length > 0) return Promise.resolve();
+
     const { data } = await useFetch({
       method: "GET",
       endpoint: "season",

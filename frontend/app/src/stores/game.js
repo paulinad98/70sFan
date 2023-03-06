@@ -15,6 +15,8 @@ export const useGameStore = defineStore("game", () => {
   }
 
   async function getGames() {
+    if (gameData.value.length > 0) return Promise.resolve();
+
     const response = await useFetch({
       method: "GET",
       endpoint: "game",

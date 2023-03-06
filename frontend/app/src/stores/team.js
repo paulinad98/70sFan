@@ -17,6 +17,8 @@ export const useTeamStore = defineStore("team", () => {
   }
 
   async function getTeams() {
+    if (teamData.value.length > 0) return Promise.resolve();
+
     const { data } = await useFetch({
       method: "GET",
       endpoint: "team",

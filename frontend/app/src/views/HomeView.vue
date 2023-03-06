@@ -49,14 +49,14 @@ const inputs = [
   },
   {
     name: "homeTeamId",
-    label: "homeTeamId",
+    label: "Home team",
     validators: [],
     select: true,
     store: "team",
   },
   {
     name: "awayTeamId",
-    label: "awayTeamId",
+    label: "Away team",
     validators: [],
     select: true,
     store: "team",
