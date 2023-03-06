@@ -15,12 +15,12 @@ export const useGameStore = defineStore("game", () => {
   }
 
   async function getGames() {
-    const { data } = await useFetch({
+    const response = await useFetch({
       method: "GET",
       endpoint: "game",
     });
 
-    data.forEach((game) => {
+    response.data.games.forEach((game) => {
       const homeTeamName = game.teams.find(
         (team) => team.id === game.homeTeamId
       ).name;
