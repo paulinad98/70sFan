@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const bodyParser = require("body-parser");
-
+const multer = require("multer");
 const sequelize = require("./util/database");
 
 const Patreon = require("./models/patreon");
@@ -19,6 +19,7 @@ const seasonRoutes = require("./routes/season");
 const app = express();
 
 app.use(bodyParser.json());
+app.use(multer().single("file"));
 
 app.use((req, res, next) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
