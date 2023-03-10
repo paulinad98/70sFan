@@ -178,7 +178,7 @@ exports.postGameFile = async (req, res, next) => {
 };
 
 exports.getGames = async (req, res, next) => {
-  let { season, homeTeamId, awayTeamId, page } = req.query;
+  let { seasonId, homeTeamId, awayTeamId, page } = req.query;
 
   const limit = 6;
 
@@ -190,7 +190,7 @@ exports.getGames = async (req, res, next) => {
 
   const offset = (page - 1) * limit;
 
-  let conditions = [{ season }, { homeTeamId }, { awayTeamId }];
+  let conditions = [{ seasonId }, { homeTeamId }, { awayTeamId }];
 
   conditions = conditions.filter((condition) => {
     return Object.values(condition)[0] !== undefined;
