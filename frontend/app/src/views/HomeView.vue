@@ -42,7 +42,7 @@ const {
 
 const inputs = [
   {
-    name: "season",
+    name: "seasonId",
     label: "Season",
     select: true,
     store: "season",
