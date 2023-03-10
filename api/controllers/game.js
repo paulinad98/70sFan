@@ -154,7 +154,21 @@ exports.postGameFile = async (req, res, next) => {
       };
     });
 
-    await Game.bulkCreate(games);
+    const gamesWithId = await Game.bulkCreate(games);
+
+    const gameTeamArray = [];
+    const gameSeasonArray = [];
+
+    gamesWithId.forEach((game) => {
+      gameTeamArray.push({ gameId: game.id, teamId: game.homeTeamId });
+      gameTeamArray.push({ gameId: game.id, teamId: game.awayTeamId });
+      gameSeasonArray.push({ gameId: game.id, seasonId: game.seasonId });
+    });
+
+    await Promise.all([
+      TeamGames.bulkCreate(gameTeamArray),
+      SeasonGames.bulkCreate(gameSeasonArray),
+    ]);
 
     return res.status(201).send({ message: "Game created" });
   } catch (err) {
