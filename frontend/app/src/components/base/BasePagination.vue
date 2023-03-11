@@ -39,7 +39,7 @@ const PaginationButton = ({ page }, { slots }) => {
   const baseClasses =
     "px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700";
   const highlightClasses =
-    "z-10 px-3 py-2 leading-tight text-blue-600 border border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700";
+    "text-blue-600 border-blue-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700";
 
   return h(
     "li",
