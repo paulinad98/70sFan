@@ -1,12 +1,14 @@
 const { Op } = require("sequelize");
 
+const axios = require("axios");
+const cheerio = require("cheerio");
+const reader = require("xlsx");
+
 const Game = require("../models/game");
 const TeamGames = require("../models/teamGames");
 const SeasonGames = require("../models/seasonGames");
 const Team = require("../models/team");
 const Season = require("../models/season");
-
-const reader = require("xlsx");
 
 const createTeamGames = (gameId, teamId) => {
   return TeamGames.create({ gameId, teamId });
@@ -215,5 +217,35 @@ exports.getGames = async (req, res, next) => {
     return res.status(201).send({ games, meta: { total, lastPage, page } });
   } catch (err) {
     return res.status(500).send(err);
+  }
+};
+
+exports.setGameScoresFromBasketballReference = async (req, res, next) => {
+  try {
+    const gamesWithNoScore = await Game.findAll({
+      where: { [Op.or]: [{ homeTeamScore: 0 }, { awayTeamScore: 0 }] },
+      include: { model: Team },
+    });
+
+    const req = [];
+
+    gamesWithNoScore.slice(0, 5).forEach(async (game) => {
+      const html = await axios(game.basketballReferenceUrl);
+      const $ = cheerio.load(html.data);
+
+      const awayTeamScore = $($(".score")[0]).text();
+      const homeTeamScore = $($(".score")[1]).text();
+
+      req.push(
+        Game.update(
+          { homeTeamScore, awayTeamScore, gameUrl: [] },
+          { where: { id: game.id } }
+        )
+      );
+    });
+
+    await Promise.all(req);
+  } catch (err) {
+    console.log(err);
   }
 };
