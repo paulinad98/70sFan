@@ -64,8 +64,8 @@ const TeamScore = (props) => {
 
       <team-logo :src="awayTeam.logoUrl" :name="awayTeam.name" />
       <team-score
-        :score="game.homeTeamScore"
-        :opponent-score="game.awayTeamScore"
+        :score="game.awayTeamScore"
+        :opponent-score="game.homeTeamScore"
       />
     </div>
 
