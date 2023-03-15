@@ -50,7 +50,7 @@ const TeamScore = (props) => {
       <team-logo :src="homeTeam.logoUrl" :name="homeTeam.name" />
       <team-score
         :score="game.homeTeamScore"
-        :opponent-score="game.awayTeamScore"
+        :opponentScore="game.awayTeamScore"
         class="row-start-2"
       />
 
@@ -65,7 +65,7 @@ const TeamScore = (props) => {
       <team-logo :src="awayTeam.logoUrl" :name="awayTeam.name" />
       <team-score
         :score="game.awayTeamScore"
-        :opponent-score="game.homeTeamScore"
+        :opponentScore="game.homeTeamScore"
       />
     </div>
 
