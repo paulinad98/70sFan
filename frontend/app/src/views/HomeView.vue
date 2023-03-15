@@ -1,8 +1,6 @@
 <script setup>
-// import BaseSelect from "@/components/base/BaseSelect.vue";
 import BaseForm from "@/components/base/BaseForm.vue";
 import BasePagination from "@/components/base/BasePagination.vue";
-
 import BaseMultiselect from "@/components/base/BaseMultiselect.vue";
 
 import GamePreview from "@/components/home/GamePreview.vue";
