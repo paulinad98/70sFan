@@ -21,7 +21,7 @@ const emits = defineEmits(["update:modelValue", "change"]);
 
 const limitPage = computed(() => {
   if (props.maxPage > props.lastPage) {
-    return props.lastPage;
+    return props.lastPage - 1;
   }
 
   return props.maxPage;
@@ -62,15 +62,23 @@ const PaginationButton = ({ page }, { slots }) => {
 </script>
 
 <template>
-  <nav aria-label="pagination">
+  <nav v-if="lastPage > 1" aria-label="pagination">
     <ul class="inline-flex items-center">
       <pagination-button :page="modelValue - 1 > 0 ? modelValue - 1 : 1">
         <span class="sr-only">Previous</span>
         <prev-icon />
       </pagination-button>
 
-      <pagination-button v-if="modelValue !== 1" :page="1" />
-      <li v-if="modelValue !== 1" class="text-gray-500 mx-1">...</li>
+      <pagination-button
+        v-if="modelValue !== 1 || limitPage > maxPage"
+        :page="1"
+      />
+      <li
+        v-if="modelValue !== 1 || limitPage > maxPage"
+        class="text-gray-500 mx-1"
+      >
+        ...
+      </li>
 
       <pagination-button
         :key="`page-${page}`"
