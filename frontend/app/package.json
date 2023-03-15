@@ -10,6 +10,8 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@vueform/multiselect": "^2.6.1",
+    "mini-svg-data-uri": "^1.4.4",
     "pinia": "^2.0.28",
     "vue": "^3.2.45",
     "vue-query": "^1.26.0",

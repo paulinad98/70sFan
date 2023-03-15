@@ -4,7 +4,13 @@ const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 export function useFetchApi() {
   function setQuery(payload) {
     const query = Object.keys(payload)
-      .map((key) => `${key}=${payload[key]}`)
+      .map((key) => {
+        if (Array.isArray(payload[key])) {
+          return payload[key].map((value) => `${key}[]=${value}`).join("&");
+        } else {
+          return `${key}=${payload[key]}`;
+        }
+      })
       .join("&");
 
     return query;

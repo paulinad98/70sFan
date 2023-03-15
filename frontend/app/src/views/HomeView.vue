@@ -1,7 +1,9 @@
 <script setup>
-import BaseSelect from "@/components/base/BaseSelect.vue";
+// import BaseSelect from "@/components/base/BaseSelect.vue";
 import BaseForm from "@/components/base/BaseForm.vue";
 import BasePagination from "@/components/base/BasePagination.vue";
+
+import BaseMultiselect from "@/components/base/BaseMultiselect.vue";
 
 import GamePreview from "@/components/home/GamePreview.vue";
 
@@ -42,23 +44,13 @@ const {
 
 const inputs = [
   {
-    name: "seasonId",
-    label: "Season",
-    select: true,
+    name: "seasonsId",
+    label: "Seasons",
     store: "season",
   },
   {
-    name: "homeTeamId",
-    label: "Home team",
-    validators: [],
-    select: true,
-    store: "team",
-  },
-  {
-    name: "awayTeamId",
-    label: "Away team",
-    validators: [],
-    select: true,
+    name: "teamsId",
+    label: "Teams",
     store: "team",
   },
 ];
@@ -100,11 +92,10 @@ function getInput(input) {
   <div class="grid grid-cols-[250px_auto] gap-14">
     <base-form @submit="sendForm()">
       <template :key="`input-${input.name}`" v-for="input in inputs">
-        <base-select
-          :label="getInput(input).label"
-          :error="getInput(input).error"
+        <base-multiselect
           v-model="getInput(input).value"
           :options="stores[input.store][`${input.store}Options`]"
+          :label="getInput(input).label"
         />
         <br class="my-2.5 block content-['']" />
       </template>
