@@ -8,7 +8,7 @@ export const useTeamStore = defineStore("team", () => {
 
   const teamData = ref([]);
 
-  const teamOptions = computed(() => {
+  const options = computed(() => {
     return teamData.value.map(([id, name]) => ({ value: id, label: name }));
   });
 
@@ -41,5 +41,5 @@ export const useTeamStore = defineStore("team", () => {
     addTeam([id, name, logoUrl]);
   }
 
-  return { teamData, teamOptions, addTeam, getTeams, postTeam };
+  return { teamData, options, addTeam, getTeams, postTeam };
 });

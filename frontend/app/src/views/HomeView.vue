@@ -18,11 +18,6 @@ const { useFetch, setQuery } = useFetchApi();
 const storeSeason = useSeasonStore();
 const storeTeam = useTeamStore();
 
-const stores = {
-  season: storeSeason,
-  team: storeTeam,
-};
-
 useQuery("teams", storeTeam.getTeams);
 useQuery("seasons", storeSeason.getSeasons);
 
@@ -44,12 +39,25 @@ const inputs = [
   {
     name: "seasonsId",
     label: "Seasons",
-    store: "season",
+    store: storeSeason,
+    mode: "tags",
   },
   {
     name: "teamsId",
     label: "Teams",
-    store: "team",
+    store: storeTeam,
+    mode: "tags",
+  },
+  {
+    name: "seasonPhase",
+    label: "Season Phase",
+    store: {
+      options: [
+        { value: "RS", label: "Regular" },
+        { value: "Playoffs", label: "Playoff" },
+      ],
+    },
+    mode: "single",
   },
 ];
 
@@ -88,12 +96,13 @@ function getInput(input) {
 
 <template>
   <div class="grid grid-cols-[250px_auto] gap-14">
-    <base-form @submit="sendForm()">
+    <base-form @submit="sendForm()" autocomplete="off">
       <template :key="`input-${input.name}`" v-for="input in inputs">
         <base-multiselect
           v-model="getInput(input).value"
-          :options="stores[input.store][`${input.store}Options`]"
+          :options="input.store.options"
           :label="getInput(input).label"
+          :mode="input.mode"
         />
         <br class="my-2.5 block content-['']" />
       </template>

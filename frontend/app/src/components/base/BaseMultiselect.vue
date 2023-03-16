@@ -8,13 +8,12 @@ defineProps({
     type: String,
     required: true,
   },
-  modelValue: {
-    type: [String, Number, Array],
-  },
+  modelValue: [String, Number, Array],
   options: {
     type: Array,
     required: true,
   },
+  mode: String,
 });
 
 const emit = defineEmits(["update:modelValue"]);
@@ -39,7 +38,7 @@ watch(
   <Multiselect
     v-model="selectItems"
     :options="options"
-    mode="tags"
+    :mode="mode"
     searchable
     :placeholder="label"
     :id="id"
@@ -50,10 +49,15 @@ watch(
 @import "@vueform/multiselect/themes/tailwind.css";
 
 .multiselect-tag {
-  @apply bg-primary-50;
+  @apply bg-primary-200;
 }
 
 .multiselect.is-active {
   @apply ring-primary-200;
+}
+
+.multiselect-option.is-selected,
+.multiselect-option.is-selected.is-pointed {
+  @apply bg-primary-200;
 }
 </style>

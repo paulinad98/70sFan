@@ -8,7 +8,7 @@ export const useSeasonStore = defineStore("season", () => {
 
   const seasonData = ref([]);
 
-  const seasonOptions = computed(() => {
+  const options = computed(() => {
     return seasonData.value.map(([id, years]) => ({ value: id, label: years }));
   });
 
@@ -41,5 +41,5 @@ export const useSeasonStore = defineStore("season", () => {
     addSeason([id, years]);
   }
 
-  return { seasonData, seasonOptions, addSeason, getSeasons, postSeason };
+  return { seasonData, options, addSeason, getSeasons, postSeason };
 });
