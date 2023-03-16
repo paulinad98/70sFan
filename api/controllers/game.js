@@ -180,7 +180,7 @@ exports.postGameFile = async (req, res, next) => {
 };
 
 exports.getGames = async (req, res, next) => {
-  let { seasonsId, teamsId, page } = req.query;
+  let { seasonsId, teamsId, seasonPhase, page } = req.query;
 
   page = +page;
   if (!page || !Number.isInteger(page)) {
@@ -198,6 +198,7 @@ exports.getGames = async (req, res, next) => {
           awayTeamId: teamsId || { [Op.ne]: null },
         },
         seasonId: seasonsId || { [Op.ne]: null },
+        seasonPhase: seasonPhase || { [Op.ne]: null },
       },
     };
 
