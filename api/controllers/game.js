@@ -180,41 +180,43 @@ exports.postGameFile = async (req, res, next) => {
 };
 
 exports.getGames = async (req, res, next) => {
-  let { seasonId, homeTeamId, awayTeamId, page } = req.query;
-
-  const limit = 6;
+  let { seasonsId, teamsId, page } = req.query;
 
   page = +page;
-
   if (!page || !Number.isInteger(page)) {
     page = 1;
   }
 
+  const limit = 6;
   const offset = (page - 1) * limit;
 
-  let conditions = [{ seasonId }, { homeTeamId }, { awayTeamId }];
-
-  conditions = conditions.filter((condition) => {
-    return Object.values(condition)[0] !== undefined;
-  });
-
   try {
-    const totalPromise = Game.count({
-      where: { [Op.and]: [...conditions] },
+    const where = {
+      [Op.and]: {
+        [Op.or]: {
+          homeTeamId: teamsId || { [Op.ne]: null },
+          awayTeamId: teamsId || { [Op.ne]: null },
+        },
+        seasonId: seasonsId || { [Op.ne]: null },
+      },
+    };
+
+    const totalGamesNumber = Game.count({
+      where,
     });
 
-    const gamesPromise = Game.findAll({
-      where: { [Op.and]: [...conditions] },
+    const filterGames = Game.findAll({
+      where,
       include: { model: Team },
       limit,
       offset,
     });
 
-    const [total, games] = await Promise.all([totalPromise, gamesPromise]);
+    const [total, games] = await Promise.all([totalGamesNumber, filterGames]);
 
     const lastPage = Math.ceil(total / limit);
 
-    return res.status(201).send({ games, meta: { total, lastPage, page } });
+    return res.status(200).send({ games, meta: { total, lastPage, page } });
   } catch (err) {
     return res.status(500).send(err);
   }
