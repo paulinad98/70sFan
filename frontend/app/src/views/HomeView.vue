@@ -54,7 +54,7 @@ const inputs = [
     store: {
       options: [
         { value: "RS", label: "Regular" },
-        { value: "Playoffs", label: "Playoff" },
+        { value: "Playoffs", label: "Playoffs" },
       ],
     },
     mode: "single",
