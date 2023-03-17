@@ -2,37 +2,35 @@
 import NextIcon from "@/components/icons/NextIcon.vue";
 import PrevIcon from "@/components/icons/PrevIcon.vue";
 
-import { computed, h } from "vue";
+import { setPaginationPagesArray, getHalfPages } from "@/utils/pagination";
+
+import { h, computed } from "vue";
+
 const props = defineProps({
   lastPage: {
     type: Number,
     required: true,
   },
-  modelValue: {
-    type: Number,
-  },
-  maxPage: {
+  modelValue: Number,
+  maxPageDisplay: {
     type: Number,
     default: 5,
+    validator: (value) => value % 2 === 1,
   },
 });
 
 const emits = defineEmits(["update:modelValue", "change"]);
 
-const limitPage = computed(() => {
-  if (props.maxPage > props.lastPage) {
-    return props.lastPage - 1;
-  }
-
-  return props.maxPage;
+const pagesArray = computed(() => {
+  return setPaginationPagesArray(
+    props.maxPageDisplay,
+    props.lastPage,
+    props.modelValue
+  );
 });
 
-const offsetPage = computed(() => {
-  if (props.modelValue > props.lastPage - limitPage.value) {
-    return props.lastPage - limitPage.value - 1;
-  }
-
-  return props.modelValue - 1;
+const halfOfMaxDisplay = computed(() => {
+  return getHalfPages(props.maxPageDisplay);
 });
 
 const PaginationButton = ({ page }, { slots }) => {
@@ -69,12 +67,9 @@ const PaginationButton = ({ page }, { slots }) => {
         <prev-icon />
       </pagination-button>
 
-      <pagination-button
-        v-if="modelValue !== 1 || limitPage > maxPage"
-        :page="1"
-      />
+      <pagination-button :page="1" />
       <li
-        v-if="modelValue !== 1 || limitPage > maxPage"
+        v-if="modelValue > maxPageDisplay - halfOfMaxDisplay + 1"
         class="text-gray-500 mx-1"
       >
         ...
@@ -82,12 +77,12 @@ const PaginationButton = ({ page }, { slots }) => {
 
       <pagination-button
         :key="`page-${page}`"
-        v-for="page in limitPage"
-        :page="page + offsetPage"
+        v-for="page in pagesArray"
+        :page="page"
       />
 
       <li
-        v-if="offsetPage + limitPage + 1 !== lastPage"
+        v-if="modelValue < lastPage - halfOfMaxDisplay - 1"
         class="text-gray-500 mx-1"
       >
         ...
