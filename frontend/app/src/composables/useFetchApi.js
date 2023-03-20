@@ -18,6 +18,11 @@ export function useFetchApi() {
 
   const useFetch = async ({ method = "GET", payload = {}, endpoint = "" }) => {
     const body = method !== "GET" && JSON.stringify(payload);
+
+    if (method === "GET" && Object.keys(payload).length > 0) {
+      endpoint = `${endpoint}?${setQuery(payload)}`;
+    }
+
     const options = {
       method,
       headers: {

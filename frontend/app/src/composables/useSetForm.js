@@ -5,12 +5,15 @@ import { useValidateInput } from "@/composables/useValidateInput";
 export function useSetForm() {
   const form = ref(new Map());
 
-  const setupInput = ({ name, label, map, validators = [] }) => {
-    const { error, value, reset, addValidator, validate } = useValidateInput();
+  const setupInputs = (inputs) => {
+    inputs.forEach(({ name, label, validators = [] }) => {
+      const { error, value, reset, addValidator, validate } =
+        useValidateInput();
 
-    addValidator(validators);
+      addValidator(validators);
 
-    map.value.set(name, { label, error, value, reset, validate });
+      form.value.set(name, { label, error, value, reset, validate });
+    });
   };
 
   const validateForm = () => {
@@ -18,8 +21,6 @@ export function useSetForm() {
 
     form.value.forEach((input) => {
       const error = input.validate();
-
-      console.log(error);
 
       if (!isError && error) {
         isError = true;
@@ -53,7 +54,7 @@ export function useSetForm() {
 
   return {
     form,
-    setupInput,
+    setupInputs,
     resetForm,
     validateForm,
     clearForm,
