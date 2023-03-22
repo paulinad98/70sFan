@@ -30,6 +30,7 @@ export function useFetchApi() {
         "x-auth-token": API_TOKEN,
       },
       mode: "cors",
+      credentials: "include",
     };
 
     if (body) {

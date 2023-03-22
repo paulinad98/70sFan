@@ -31,6 +31,7 @@ app.use((req, res, next) => {
     "Access-Control-Allow-Headers",
     "Content-Type, Origin, x-auth-token"
   );
+  res.setHeader("Access-Control-Allow-Credentials", true);
   next();
 });
 
