@@ -65,7 +65,7 @@ async function sendForm() {
   const { data } = await useFetch({
     method: "GET",
     endpoint: `game`,
-    payload,
+    payload: { ...payload, page: props.modelValue.currentPage },
   });
 
   emit("update:modelValue", {
