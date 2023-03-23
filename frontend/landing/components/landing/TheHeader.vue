@@ -48,14 +48,7 @@
   </header>
 </template>
 
-<script>
-import Youtube from "../../../globalComponents/icons/Youtube.vue";
-import Patreon from "../../../globalComponents/icons/Patreon.vue";
-
-export default {
-  components: {
-    Youtube,
-    Patreon,
-  },
-};
+<script setup>
+import Youtube from "@/components/globalComponents/icons/Youtube.vue";
+import Patreon from "@/components/globalComponents/icons/Patreon.vue";
 </script>
