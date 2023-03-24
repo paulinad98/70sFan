@@ -1,5 +1,5 @@
 const API_URL = import.meta.env.VITE_API_URL;
-const API_TOKEN = import.meta.env.VITE_API_TOKEN;
+// const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 
 export function useFetchApi() {
   function setQuery(payload) {
@@ -27,7 +27,7 @@ export function useFetchApi() {
       method,
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": API_TOKEN,
+        "x-auth-token": localStorage.getItem("token"),
       },
       mode: "cors",
       credentials: "include",
@@ -39,9 +39,10 @@ export function useFetchApi() {
 
     try {
       const response = await fetch(`${API_URL}/${endpoint}`, options);
+      const statusCode = response.status;
       const data = await response.json();
 
-      return { data };
+      return { data, status: statusCode };
     } catch (error) {
       return { error };
     }
