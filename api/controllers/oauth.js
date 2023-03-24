@@ -13,6 +13,8 @@ const REDIRECT = process.env.PATREON_REDIRECT_URI;
 const JWT_PRIVATE_KEY = process.env.PRIVATE_KEY;
 const ADMIN_ID = process.env.ADMIN_ID;
 
+const FRONTEND_URL_OAUTH = process.env.FRONTEND_URL_OAUTH;
+
 const oauthClientPatreon = oauth(CLIENT_ID, CLIENT_SECRET);
 
 const URL =
@@ -51,18 +53,18 @@ exports.oauthClient = async (req, res, next) => {
       patreonDataIncluded.attributes;
 
     if (id === ADMIN_ID) {
-      return res.status(200).send({
-        ok: true,
-        token,
-        patreon: { id, full_name, admin: true },
+      const today = new Date();
+      const expiresDate = today.setMonth(today.getMonth() + 1);
+
+      const token = jwt.sign({ id, full_name }, JWT_PRIVATE_KEY, {
+        expiresIn: dateDiffInSeconds(new Date(), new Date(expiresDate)),
       });
+
+      return res.redirect(`${FRONTEND_URL_OAUTH}?token=${token}`);
     }
 
     if (last_charge_status !== "Paid") {
-      return res.status(401).send({
-        ok: false,
-        error: "Access denied. Don't have a paid membership",
-      });
+      return res.redirect(`${FRONTEND_AUTH_URL}`);
     }
 
     const lastChargeDate = new Date(last_charge_date);
@@ -78,11 +80,7 @@ exports.oauthClient = async (req, res, next) => {
       Patreon.create({ id, name: full_name });
     }
 
-    return res.status(200).send({
-      ok: true,
-      token,
-      patreon: { id, full_name },
-    });
+    return res.redirect(`${FRONTEND_URL_OAUTH}?token=${token}`);
   } catch (err) {
     console.log(err);
   }
