@@ -15,6 +15,11 @@ const router = createRouter({
       props: (route) => ({ tab: route.params.tab || "team" }),
       component: () => import("../views/PanelView.vue"),
     },
+    {
+      path: "/oauth",
+      name: "Auth",
+      component: () => import("@/views/AuthView.vue"),
+    },
   ],
 });
 
