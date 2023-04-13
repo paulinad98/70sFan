@@ -1,7 +1,11 @@
+import { useUserStore } from "@/stores/user";
+
 const API_URL = import.meta.env.VITE_API_URL;
 // const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 
 export function useFetchApi() {
+  const storeUser = useUserStore();
+
   function setQuery(payload) {
     const query = Object.keys(payload)
       .map((key) => {
@@ -27,7 +31,7 @@ export function useFetchApi() {
       method,
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": localStorage.getItem("token"),
+        "x-auth-token": storeUser.getToken(),
       },
       mode: "cors",
       credentials: "include",

@@ -1,19 +1,22 @@
 <script setup>
-import BaseSpinner from "@/components/base/BaseSpinner.vue";
-import ErrorLayout from "@/components/errors/ErrorLayout.vue";
-
 import { onMounted, ref } from "vue";
 import { useRoute, useRouter } from "vue-router";
-import { useFetchApi } from "@/composables/useFetchApi";
 
-const route = useRoute();
-const router = useRouter();
-const { useFetch } = useFetchApi();
+import BaseSpinner from "@/components/base/BaseSpinner.vue";
+import ErrorLayout from "@/components/errors/ErrorLayout.vue";
+import { useFetchApi } from "@/composables/useFetchApi";
+import { useUserStore } from "@/stores/user";
 
 const PATREON_URL = import.meta.env.VITE_PATREON_URL;
 const LANDING_URL = import.meta.env.VITE_LANDING_URL;
 
-const isLoading = ref(false);
+const route = useRoute();
+const router = useRouter();
+
+const { useFetch } = useFetchApi();
+const storeUser = useUserStore();
+
+const isLoading = ref(true);
 const error = ref(null);
 
 onMounted(async () => {
@@ -22,7 +25,15 @@ onMounted(async () => {
     return;
   }
 
-  if (!route.query.token) return;
+  const token = route.query.token;
+
+  if (!token) {
+    isLoading.value = false;
+    return;
+  }
+
+  storeUser.setUserToken(token);
+
   const response = await useFetch({
     method: "GET",
     endpoint: "oauth/user",
@@ -38,6 +49,8 @@ onMounted(async () => {
   if (response.status === 401) {
     error.value = "not_auth";
   }
+
+  isLoading.value = false;
 });
 </script>
 
