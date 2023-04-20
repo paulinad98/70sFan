@@ -1,6 +1,7 @@
 import { useUserStore } from "@/stores/user";
 import { useCheckError } from "@/composables/useCheckError";
 import { useRouter } from "vue-router";
+import { setQuery } from "@/utils/query";
 
 const API_URL = import.meta.env.VITE_API_URL;
 // const API_TOKEN = import.meta.env.VITE_API_TOKEN;
@@ -8,20 +9,6 @@ const API_URL = import.meta.env.VITE_API_URL;
 export function useFetchApi() {
   const storeUser = useUserStore();
   const router = useRouter();
-
-  function setQuery(payload) {
-    const query = Object.keys(payload)
-      .map((key) => {
-        if (Array.isArray(payload[key])) {
-          return payload[key].map((value) => `${key}[]=${value}`).join("&");
-        } else {
-          return `${key}=${payload[key]}`;
-        }
-      })
-      .join("&");
-
-    return query;
-  }
 
   const useFetch = async ({ method = "GET", payload = {}, endpoint = "" }) => {
     const body = method !== "GET" && JSON.stringify(payload);
