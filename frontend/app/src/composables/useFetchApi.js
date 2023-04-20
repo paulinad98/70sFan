@@ -1,10 +1,13 @@
 import { useUserStore } from "@/stores/user";
+import { useCheckError } from "@/composables/useCheckError";
+import { useRouter } from "vue-router";
 
 const API_URL = import.meta.env.VITE_API_URL;
 // const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 
 export function useFetchApi() {
   const storeUser = useUserStore();
+  const router = useRouter();
 
   function setQuery(payload) {
     const query = Object.keys(payload)
@@ -45,6 +48,13 @@ export function useFetchApi() {
       const response = await fetch(`${API_URL}/${endpoint}`, options);
       const statusCode = response.status;
       const data = await response.json();
+
+      const { checkError } = useCheckError();
+      const error = checkError(statusCode);
+
+      if (error) {
+        router.push({ name: "Error", params: { error } });
+      }
 
       return { data, status: statusCode };
     } catch (error) {

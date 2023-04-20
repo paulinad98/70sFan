@@ -16,6 +16,12 @@ const router = createRouter({
       component: () => import("../views/PanelView.vue"),
     },
     {
+      path: "/error/:error",
+      name: "Error",
+      props: (route) => ({ error: route.params.error || "customError" }),
+      component: () => import("../views/ErrorView.vue"),
+    },
+    {
       path: "/oauth",
       name: "Auth",
       component: () => import("@/views/AuthView.vue"),
