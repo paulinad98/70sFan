@@ -34,7 +34,7 @@ export function useAuth() {
   function setToken() {
     if (isError()) return;
 
-    const token = storeUser.userToken;
+    const token = route.query.token;
     if (!token) {
       error.value = "authError";
       return;
