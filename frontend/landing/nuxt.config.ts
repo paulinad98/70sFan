@@ -14,4 +14,5 @@ export default defineNuxtConfig({
       patreonRedirectUri: process.env.PUBLIC_PATREON_REDIRECT_URI || "",
     },
   },
+  modules: ["@pinia/nuxt"],
 });
