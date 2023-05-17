@@ -25,6 +25,7 @@ app.use((req, res, next) => {
   const allowedOrigins = [
     "http://127.0.0.1:5173",
     "https://70s-fan-front.vercel.app",
+    "http://localhost:3000",
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
