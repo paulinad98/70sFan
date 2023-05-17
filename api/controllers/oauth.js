@@ -64,7 +64,7 @@ exports.oauthClient = async (req, res, next) => {
     }
 
     if (last_charge_status !== "Paid") {
-      return res.redirect(`${FRONTEND_AUTH_URL}?error=paidError`);
+      return res.redirect(`${FRONTEND_URL_OAUTH}?error=paidError`);
     }
 
     const lastChargeDate = new Date(last_charge_date);
