@@ -3,7 +3,6 @@ import { useCheckError } from "@/composables/useCheckError";
 import { useRouter } from "vue-router";
 import { setQuery } from "@/utils/query";
 
-
 export function useFetchApi(context) {
   const config = useRuntimeConfig();
   const API_URL = config.public.apiUrl;
@@ -18,11 +17,12 @@ export function useFetchApi(context) {
       endpoint = `${endpoint}?${setQuery(payload)}`;
     }
 
+    const token = storeUser.getToken();
     const options = {
       method,
       headers: {
         "Content-Type": "application/json",
-        "x-auth-token": storeUser.getToken(),
+        "x-auth-token": token,
       },
       mode: "cors",
       credentials: "include",

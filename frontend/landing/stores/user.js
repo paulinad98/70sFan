@@ -14,11 +14,13 @@ export const useUserStore = defineStore("user", () => {
 
   function setUserToken(token) {
     user.value.token = token;
+    console.log(user.value.token);
   }
 
   function getToken() {
     if (!user.value.token) {
-      return "";
+      getTokenFromLS();
+      return user.value.token;
     }
 
     return user.value.token;
@@ -26,6 +28,7 @@ export const useUserStore = defineStore("user", () => {
 
   function getTokenFromLS() {
     const token = localStorage.getItem("token");
+
     if (!token) return;
 
     setUserToken(token);

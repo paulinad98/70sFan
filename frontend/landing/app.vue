@@ -1,7 +1,7 @@
 <script setup></script>
 
 <template>
-  <NuxtLayout :name="route.meta.layout">
+  <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
 </template>
