@@ -6,8 +6,6 @@ import PlusIcon from "@/components/icons/PlusIcon.vue";
 
 import { useHandleModal } from "@/composables/useHandleModal";
 
-import { defineProps } from "vue";
-
 const { isActive, toggleModal } = useHandleModal();
 
 defineProps(["tab"]);

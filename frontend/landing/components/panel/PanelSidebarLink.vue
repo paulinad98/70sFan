@@ -1,5 +1,4 @@
 <script setup>
-import { defineProps } from "vue";
 import useActiveRoute from "@/composables/useActiveRoute";
 
 const props = defineProps({
