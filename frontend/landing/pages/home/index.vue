@@ -12,8 +12,8 @@ import { useSeasonStore } from "@/stores/season";
 const storeSeason = useSeasonStore();
 const storeTeam = useTeamStore();
 
-storeTeam.getTeams;
-storeSeason.getSeasons;
+storeTeam.getTeams();
+storeSeason.getSeasons();
 
 const games = ref({
   data: [],

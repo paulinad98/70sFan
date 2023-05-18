@@ -1,16 +1,6 @@
 <script setup>
-import { onMounted } from "vue";
-
 import AppFooter from "@/components/globalComponents/app/AppFooter.vue";
 import AppNavigation from "@/components//globalComponents/app/AppNavigation.vue";
-
-import { useUserStore } from "@/stores/user";
-
-onMounted(() => {
-  const storeUser = useUserStore();
-
-  storeUser.getTokenFromLS();
-});
 </script>
 
 <template>
