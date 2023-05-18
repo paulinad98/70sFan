@@ -3,10 +3,11 @@ import { useCheckError } from "@/composables/useCheckError";
 import { useRouter } from "vue-router";
 import { setQuery } from "@/utils/query";
 
-const API_URL = import.meta.env.VITE_API_URL;
-// const API_TOKEN = import.meta.env.VITE_API_TOKEN;
 
-export function useFetchApi() {
+export function useFetchApi(context) {
+  const config = useRuntimeConfig();
+  const API_URL = config.public.apiUrl;
+
   const storeUser = useUserStore();
   const router = useRouter();
 

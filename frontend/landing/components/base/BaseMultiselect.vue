@@ -45,8 +45,9 @@ watch(
   />
 </template>
 
+<style src="@vueform/multiselect/themes/default.css"></style>
 <style>
-@import "@vueform/multiselect/themes/tailwind.css";
+/* @import "@vueform/multiselect/themes/tailwind.css"; */
 
 .multiselect-tag {
   @apply bg-primary-200;

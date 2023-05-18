@@ -22,5 +22,8 @@ import SectionTwo from "@/components/landing/SectionTwo.vue";
 import SectionThree from "@/components/landing/SectionThree.vue";
 import SectionFour from "@/components/landing/SectionFour.vue";
 import JoinUs from "@/components/landing/JoinUs.vue";
-import LoginButton from "@/components/landing/LoginButton.vue";
+
+definePageMeta({
+  layout: "landing",
+});
 </script>

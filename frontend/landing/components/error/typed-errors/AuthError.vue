@@ -3,7 +3,8 @@ import ErrorHeader from "@/components/error/ErrorHeader.vue";
 import ErrorLink from "@/components/error/ErrorLink.vue";
 import ErrorLayout from "@/components/error/ErrorLayout.vue";
 
-const LANDING_URL = import.meta.env.VITE_LANDING_URL;
+  const config = useRuntimeConfig();
+  const LANDING_URL = config.public.landingUrl;
 </script>
 
 <template>

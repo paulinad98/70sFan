@@ -1,7 +1,7 @@
 import { describe, it, expect } from "vitest";
 
 import { mount } from "@vue/test-utils";
-import BasePagination from "@/components/base/BasePagination.vue";
+import BasePagination from "../components/base/BasePagination.vue";
 
 describe("BasePagination", () => {
   it("renders properly", () => {

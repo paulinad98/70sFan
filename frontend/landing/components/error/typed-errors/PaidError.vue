@@ -3,7 +3,8 @@ import ErrorHeader from "@/components/error/ErrorHeader.vue";
 import ErrorLink from "@/components/error/ErrorLink.vue";
 import ErrorLayout from "@/components/error/ErrorLayout.vue";
 
-const PATREON_URL = import.meta.env.VITE_PATREON_URL;
+const config = useRuntimeConfig();
+const PATREON_URL = config.public.patreonUrl;
 </script>
 
 <template>
