@@ -6,15 +6,14 @@ import HomeSearch from "@/components/home/HomeSearch.vue";
 
 import { ref } from "vue";
 
-import { useQuery } from "vue-query";
 import { useTeamStore } from "@/stores/team";
 import { useSeasonStore } from "@/stores/season";
 
 const storeSeason = useSeasonStore();
 const storeTeam = useTeamStore();
 
-useQuery("teams", storeTeam.getTeams);
-useQuery("seasons", storeSeason.getSeasons);
+storeTeam.getTeams;
+storeSeason.getSeasons;
 
 const games = ref({
   data: [],

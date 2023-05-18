@@ -1,10 +1,4 @@
-<script setup>
-import { useQueryProvider } from "vue-query";
-
-useQueryProvider();
-
-const route = useRoute();
-</script>
+<script setup></script>
 
 <template>
   <NuxtLayout :name="route.meta.layout">

@@ -1,13 +1,10 @@
 <script setup>
 import { onMounted } from "vue";
 
-import AppFooter from "../../globalComponents/app/AppFooter.vue";
-import AppNavigation from "../../globalComponents/app/AppNavigation.vue";
-import { useQueryProvider } from "vue-query";
+import AppFooter from "@/components/globalComponents/app/AppFooter.vue";
+import AppNavigation from "@/components//globalComponents/app/AppNavigation.vue";
 
 import { useUserStore } from "@/stores/user";
-
-useQueryProvider();
 
 onMounted(() => {
   const storeUser = useUserStore();
