@@ -1,16 +1,15 @@
 <script setup>
-import BaseForm from "@/components/base/BaseForm.vue";
-import BaseMultiselect from "@/components/base/BaseMultiselect.vue";
+import { onMounted } from 'vue';
+import BaseForm from '@/components/base/BaseForm.vue';
+import BaseMultiselect from '@/components/base/BaseMultiselect.vue';
 
-import { useSetForm } from "@/composables/useSetForm";
-import { useFetchApi } from "@/composables/useFetchApi";
-import { useTeamStore } from "@/stores/team";
-import { useSeasonStore } from "@/stores/season";
-
-import { onMounted } from "vue";
+import { useSetForm } from '@/composables/useSetForm';
+import { useFetchApi } from '@/composables/useFetchApi';
+import { useTeamStore } from '@/stores/team';
+import { useSeasonStore } from '@/stores/season';
 
 const props = defineProps({ modelValue: Object });
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 defineExpose({ sendForm });
 
 const storeSeason = useSeasonStore();
@@ -30,27 +29,27 @@ onMounted(() => {
 
 const inputs = [
   {
-    name: "seasonsId",
-    label: "Seasons",
+    name: 'seasonsId',
+    label: 'Seasons',
     store: storeSeason,
-    mode: "tags",
+    mode: 'tags',
   },
   {
-    name: "teamsId",
-    label: "Teams",
+    name: 'teamsId',
+    label: 'Teams',
     store: storeTeam,
-    mode: "tags",
+    mode: 'tags',
   },
   {
-    name: "seasonPhase",
-    label: "Season Phase",
+    name: 'seasonPhase',
+    label: 'Season Phase',
     store: {
       options: [
-        { value: "RS", label: "Regular" },
-        { value: "Playoffs", label: "Playoffs" },
+        { value: 'RS', label: 'Regular' },
+        { value: 'Playoffs', label: 'Playoffs' },
       ],
     },
-    mode: "single",
+    mode: 'single',
   },
 ];
 
@@ -63,12 +62,12 @@ async function sendForm() {
   const payload = getPayloadFrom();
 
   const { data } = await useFetch({
-    method: "GET",
-    endpoint: `game`,
+    method: 'GET',
+    endpoint: 'game',
     payload: { ...payload, page: props.modelValue.currentPage },
   });
 
-  emit("update:modelValue", {
+  emit('update:modelValue', {
     data: data.games,
     meta: data.meta,
     currentPage: props.modelValue.currentPage,
