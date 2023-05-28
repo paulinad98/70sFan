@@ -1,13 +1,12 @@
 <script setup>
-import BasePagination from "@/components/base/BasePagination.vue";
+import { ref } from 'vue';
+import BasePagination from '@/components/base/BasePagination.vue';
 
-import GamePreview from "@/components/home/GamePreview.vue";
-import HomeSearch from "@/components/home/HomeSearch.vue";
+import GamePreview from '@/components/home/GamePreview.vue';
+import HomeSearch from '@/components/home/HomeSearch.vue';
 
-import { ref } from "vue";
-
-import { useTeamStore } from "@/stores/team";
-import { useSeasonStore } from "@/stores/season";
+import { useTeamStore } from '@/stores/team.js';
+import { useSeasonStore } from '@/stores/season.js';
 
 const storeSeason = useSeasonStore();
 const storeTeam = useTeamStore();

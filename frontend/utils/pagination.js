@@ -28,7 +28,7 @@ export function getHalfPages(maxPageDisplay) {
   return Math.floor((maxPageDisplay - 1) / 2);
 }
 
-export function getNextPage(currentPage, lastPage) {
+export function getNextPage (currentPage, lastPage) {
   if (currentPage + 1 <= lastPage) {
     return currentPage + 1;
   } else {
@@ -50,4 +50,8 @@ export function hasFirstPageDots(maxPageDisplay, currentPage) {
 
 export function hasLastPageDots(maxPageDisplay, currentPage, lastPage) {
   return currentPage < lastPage - getHalfPages(maxPageDisplay) - 1;
+}
+
+export function hasPrevPage(currentPage) {
+  return 'sss' + currentPage ;
 }
