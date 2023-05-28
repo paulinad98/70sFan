@@ -1,9 +1,8 @@
 <script setup>
-import { onMounted } from 'vue';
+import { onMounted, ref } from 'vue';
 import BaseForm from '@/components/base/BaseForm.vue';
 import BaseMultiselect from '@/components/base/BaseMultiselect.vue';
 
-import { useSetForm } from '@/composables/useSetForm';
 import { useFetchApi } from '@/composables/useFetchApi';
 import { useTeamStore } from '@/stores/team';
 import { useSeasonStore } from '@/stores/season';
@@ -16,29 +15,25 @@ const storeSeason = useSeasonStore();
 const storeTeam = useTeamStore();
 
 const { useFetch } = useFetchApi();
-const {
-  form: searchForm,
-  setupInputs,
-  validateForm,
-  getPayloadFrom,
-} = useSetForm();
 
 onMounted(() => {
   sendForm();
 });
 
-const inputs = [
+const inputs = ref([
   {
     name: 'seasonsId',
     label: 'Seasons',
     store: storeSeason,
     mode: 'tags',
+    value: [],
   },
   {
     name: 'teamsId',
     label: 'Teams',
     store: storeTeam,
     mode: 'tags',
+    value: [],
   },
   {
     name: 'seasonPhase',
@@ -50,16 +45,18 @@ const inputs = [
       ],
     },
     mode: 'single',
+    value: null,
   },
-];
-
-setupInputs(inputs);
+]);
 
 async function sendForm() {
-  const isError = validateForm();
-  if (isError) return;
+  const payload = {};
 
-  const payload = getPayloadFrom();
+  inputs.value.forEach((input) => {
+    if (input.value) {
+      payload[input.name] = input.value;
+    }
+  });
 
   const { data } = await useFetch({
     method: 'GET',
@@ -73,17 +70,13 @@ async function sendForm() {
     currentPage: props.modelValue.currentPage,
   });
 }
-
-function getInput(input) {
-  return searchForm.value.get(input.name);
-}
 </script>
 
 <template>
   <base-form @submit="sendForm()" autocomplete="off">
     <template :key="`input-${input.name}`" v-for="input in inputs">
       <base-multiselect
-        v-model="getInput(input).value"
+        v-model="input.value"
         :options="input.store.options"
         :label="input.label"
         :mode="input.mode"
