@@ -1,18 +1,17 @@
 <script setup>
-import NextIcon from "@/components/icons/NextIcon.vue";
-import PrevIcon from "@/components/icons/PrevIcon.vue";
+import { computed } from 'vue';
+import NextIcon from '@/components/icons/NextIcon.vue';
+import PrevIcon from '@/components/icons/PrevIcon.vue';
 
-import PaginationButton from "@/components/base/pagination/PaginationButton";
-import PaginationFirstpageButton from "@/components/base/pagination/PaginationFirstpageButton";
-import PaginationLastpageButton from "@/components/base/pagination/PaginationLastpageButton";
+import PaginationButton from '@/components/base/pagination/PaginationButton';
+import PaginationFirstpageButton from '@/components/base/pagination/PaginationFirstpageButton';
+import PaginationLastpageButton from '@/components/base/pagination/PaginationLastpageButton';
 
 import {
   setPaginationPagesArray,
   getNextPage,
   getPrevPage,
-} from "@/utils/pagination";
-
-import { computed } from "vue";
+} from '@/utils/pagination';
 
 const props = defineProps({
   lastPage: {
@@ -27,29 +26,23 @@ const props = defineProps({
   },
 });
 
-//pagination logic
-const pagesArray = computed(() => {
-  return setPaginationPagesArray(
-    props.maxPageDisplay,
-    props.lastPage,
-    props.modelValue
-  );
-});
+// pagination logic
+const pagesArray = computed(() => setPaginationPagesArray(
+  props.maxPageDisplay,
+  props.lastPage,
+  props.modelValue,
+));
 
-const nextPage = computed(() => {
-  return getNextPage(props.modelValue, props.lastPage);
-});
+const nextPage = computed(() => getNextPage(props.modelValue, props.lastPage));
 
-const prevPage = computed(() => {
-  return getPrevPage(props.modelValue);
-});
+const prevPage = computed(() => getPrevPage(props.modelValue));
 
-//update page
-const emits = defineEmits(["update:modelValue", "change"]);
+// update page
+const emits = defineEmits(['update:modelValue', 'change']);
 
 function updatePage(page) {
-  emits("update:modelValue", page);
-  emits("change", page);
+  emits('update:modelValue', page);
+  emits('change', page);
 }
 </script>
 
