@@ -1,45 +1,41 @@
 <script setup>
-import { h } from "vue";
-import GamePreviewInfo from "@/components/home/GamePreviewInfo.vue";
+import { h } from 'vue';
+import GamePreviewInfo from '@/components/game/GamePreviewInfo.vue';
 
 const props = defineProps({ game: Object });
 
 const homeTeam = props.game.teams.find(
-  (team) => team.id === props.game.homeTeamId
+  (team) => team.id === props.game.homeTeamId,
 );
 const awayTeam = props.game.teams.find(
-  (team) => team.id === props.game.awayTeamId
+  (team) => team.id === props.game.awayTeamId,
 );
 
-const TeamLogo = (props) => {
-  return h(
-    "div",
-    {
-      class: "text-center mb-2",
-    },
-    [
-      h("img", {
-        class: "w-20 h-20 object-contain",
-        src: props.src,
-        alt: `${props.name} logo`,
-      }),
-      h("span", { class: "text-xs text-gray-800 text-center" }, props.name),
-    ]
-  );
-};
+const TeamLogo = (props) => h(
+  'div',
+  {
+    class: 'text-center mb-2',
+  },
+  [
+    h('img', {
+      class: 'w-20 h-20 object-contain',
+      src: props.src,
+      alt: `${props.name} logo`,
+    }),
+    h('span', { class: 'text-xs text-gray-800 text-center' }, props.name),
+  ],
+);
 
-const TeamScore = (props) => {
-  return h(
-    "span",
-    {
-      class: [
-        "text-4xl font-bold",
-        props.score > props.opponentScore ? "text-green-700" : "text-gray-800",
-      ],
-    },
-    props.score
-  );
-};
+const TeamScore = (props) => h(
+  'span',
+  {
+    class: [
+      'text-4xl font-bold',
+      props.score > props.opponentScore ? 'text-green-700' : 'text-gray-800',
+    ],
+  },
+  props.score,
+);
 </script>
 
 <template>

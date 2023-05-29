@@ -1,7 +1,7 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import BaseForm from '@/components/base/BaseForm.vue';
-import HomeSearchForm from '@/components/home/HomeSearchForm.vue';
+import GameSearchForm from '@/components/game/GameSearchForm.vue';
 
 import { useFetchApi } from '@/composables/useFetchApi';
 
@@ -46,6 +46,6 @@ async function sendForm() {
 
 <template>
   <base-form @submit="sendForm()" autocomplete="off">
-    <home-search-form v-model="form" />
+    <game-search-form v-model="form" />
   </base-form>
 </template>

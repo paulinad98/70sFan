@@ -2,8 +2,8 @@
 import { ref } from 'vue';
 import BasePagination from '@/components/base/BasePagination.vue';
 
-import GamePreview from '@/components/home/GamePreview.vue';
-import HomeSearch from '@/components/home/HomeSearch.vue';
+import GamePreview from '@/components/game/GamePreview.vue';
+import GameSearch from '@/components/game/GameSearch.vue';
 
 import { useTeamStore } from '@/stores/team.js';
 import { useSeasonStore } from '@/stores/season.js';
@@ -25,7 +25,7 @@ const searchForm = ref(null);
 
 <template>
   <div class="grid grid-cols-[250px_auto] gap-14">
-    <home-search ref="searchForm" v-model="games" />
+    <game-search ref="searchForm" v-model="games" />
 
     <main>
       <div
