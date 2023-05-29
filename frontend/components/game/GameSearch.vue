@@ -5,7 +5,7 @@ import GameSearchForm from '@/components/game/GameSearchForm.vue';
 
 import { useFetchApi } from '@/composables/useFetchApi';
 
-const props = defineProps({ modelValue: Object });
+defineProps({ modelValue: Object });
 const emit = defineEmits(['update:modelValue']);
 defineExpose({ sendForm });
 
@@ -21,7 +21,7 @@ onMounted(() => {
   sendForm();
 });
 
-async function sendForm() {
+async function sendForm(page = 1) {
   const payload = {};
 
   Object.keys(form.value).forEach((key) => {
@@ -33,13 +33,13 @@ async function sendForm() {
   const { data } = await useFetch({
     method: 'GET',
     endpoint: 'game',
-    payload: { ...payload, page: props.modelValue.currentPage },
+    payload: { ...payload, page },
   });
 
   emit('update:modelValue', {
     data: data.games,
     meta: data.meta,
-    currentPage: props.modelValue.currentPage,
+    currentPage: page,
   });
 }
 </script>

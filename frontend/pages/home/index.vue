@@ -35,7 +35,7 @@ const searchForm = ref(null);
       </div>
       <base-pagination
         class="text-center mt-8"
-        @change="searchForm.sendForm()"
+        @change="searchForm.sendForm(games.currentPage)"
         v-if="games.meta.lastPage"
         v-model="games.currentPage"
         :lastPage="games.meta.lastPage"
