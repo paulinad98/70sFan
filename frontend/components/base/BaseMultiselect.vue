@@ -1,7 +1,7 @@
 <script setup>
-import Multiselect from "@vueform/multiselect";
-import { useGetUniqueId } from "@/composables/useGetUniqueId";
-import { ref, watch } from "vue";
+import Multiselect from '@vueform/multiselect';
+import { ref, watch } from 'vue';
+import { useGetUniqueId } from '@/composables/useGetUniqueId';
 
 defineProps({
   label: {
@@ -16,7 +16,7 @@ defineProps({
   mode: String,
 });
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(['update:modelValue']);
 
 const { getId } = useGetUniqueId();
 const id = `base-input-${getId()}`;
@@ -26,8 +26,8 @@ const selectItems = ref(null);
 watch(
   () => selectItems.value,
   () => {
-    emit("update:modelValue", selectItems.value);
-  }
+    emit('update:modelValue', selectItems.value);
+  },
 );
 </script>
 
@@ -36,6 +36,7 @@ watch(
     {{ label }}
   </label>
   <Multiselect
+    v-bind="$attrs"
     v-model="selectItems"
     :options="options"
     :mode="mode"

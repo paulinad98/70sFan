@@ -1,18 +1,19 @@
 <script setup>
 import { onMounted, ref } from 'vue';
 import BaseForm from '@/components/base/BaseForm.vue';
-import BaseMultiselect from '@/components/base/BaseMultiselect.vue';
+import HomeSearchForm from '@/components/home/HomeSearchForm.vue';
 
 import { useFetchApi } from '@/composables/useFetchApi';
-import { useTeamStore } from '@/stores/team';
-import { useSeasonStore } from '@/stores/season';
 
 const props = defineProps({ modelValue: Object });
 const emit = defineEmits(['update:modelValue']);
 defineExpose({ sendForm });
 
-const storeSeason = useSeasonStore();
-const storeTeam = useTeamStore();
+const form = ref({
+  seasonsId: [],
+  teamsId: [],
+  seasonPhase: null,
+});
 
 const { useFetch } = useFetchApi();
 
@@ -20,41 +21,12 @@ onMounted(() => {
   sendForm();
 });
 
-const inputs = ref([
-  {
-    name: 'seasonsId',
-    label: 'Seasons',
-    store: storeSeason,
-    mode: 'tags',
-    value: [],
-  },
-  {
-    name: 'teamsId',
-    label: 'Teams',
-    store: storeTeam,
-    mode: 'tags',
-    value: [],
-  },
-  {
-    name: 'seasonPhase',
-    label: 'Season Phase',
-    store: {
-      options: [
-        { value: 'RS', label: 'Regular' },
-        { value: 'Playoffs', label: 'Playoffs' },
-      ],
-    },
-    mode: 'single',
-    value: null,
-  },
-]);
-
 async function sendForm() {
   const payload = {};
 
-  inputs.value.forEach((input) => {
-    if (input.value) {
-      payload[input.name] = input.value;
+  Object.keys(form.value).forEach((key) => {
+    if (form.value[key]) {
+      payload[key] = form.value[key];
     }
   });
 
@@ -74,14 +46,6 @@ async function sendForm() {
 
 <template>
   <base-form @submit="sendForm()" autocomplete="off">
-    <template :key="`input-${input.name}`" v-for="input in inputs">
-      <base-multiselect
-        v-model="input.value"
-        :options="input.store.options"
-        :label="input.label"
-        :mode="input.mode"
-      />
-      <br class="my-2.5 block content-['']" />
-    </template>
+    <home-search-form v-model="form" />
   </base-form>
 </template>
