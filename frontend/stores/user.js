@@ -1,10 +1,10 @@
-import { ref } from "vue";
-import { defineStore } from "pinia";
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
 
-export const useUserStore = defineStore("user", () => {
+export const useUserStore = defineStore('user', () => {
   const user = ref({
     id: null,
-    fullName: "",
+    fullName: '',
     token: null,
   });
 
@@ -26,12 +26,14 @@ export const useUserStore = defineStore("user", () => {
   }
 
   function getTokenFromLS() {
-    const token = localStorage.getItem("token");
+    const token = localStorage.getItem('token');
 
     if (!token) return;
 
     setUserToken(token);
   }
 
-  return { user, setUser, setUserToken, getToken, getTokenFromLS };
+  return {
+    user, setUser, setUserToken, getToken, getTokenFromLS,
+  };
 });

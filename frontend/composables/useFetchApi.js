@@ -1,7 +1,7 @@
-import { useUserStore } from "@/stores/user";
-import { useCheckError } from "@/composables/useCheckError";
-import { useRouter } from "vue-router";
-import { setQuery } from "@/utils/query";
+import { useRouter } from 'vue-router';
+import { useUserStore } from '@/stores/user';
+import { useCheckError } from '@/composables/useCheckError';
+import { setQuery } from '@/utils/query';
 
 export function useFetchApi(context) {
   const config = useRuntimeConfig();
@@ -10,10 +10,10 @@ export function useFetchApi(context) {
   const storeUser = useUserStore();
   const router = useRouter();
 
-  const useFetch = async ({ method = "GET", payload = {}, endpoint = "" }) => {
-    const body = method !== "GET" && JSON.stringify(payload);
+  const useFetch = async ({ method = 'GET', payload = {}, endpoint = '' }) => {
+    const body = method !== 'GET' && JSON.stringify(payload);
 
-    if (method === "GET" && Object.keys(payload).length > 0) {
+    if (method === 'GET' && Object.keys(payload).length > 0) {
       endpoint = `${endpoint}?${setQuery(payload)}`;
     }
 
@@ -21,11 +21,11 @@ export function useFetchApi(context) {
     const options = {
       method,
       headers: {
-        "Content-Type": "application/json",
-        "x-auth-token": token,
+        'Content-Type': 'application/json',
+        'x-auth-token': token,
       },
-      mode: "cors",
-      credentials: "include",
+      mode: 'cors',
+      credentials: 'include',
     };
 
     if (body) {
@@ -41,7 +41,7 @@ export function useFetchApi(context) {
       const error = checkError(statusCode);
 
       if (error) {
-        router.push({ name: "Error", params: { error } });
+        router.push({ name: 'Error', params: { error } });
       }
 
       return { data, status: statusCode };
