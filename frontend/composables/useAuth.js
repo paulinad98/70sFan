@@ -1,8 +1,8 @@
-import { onMounted, ref } from "vue";
-import { useRoute, useRouter } from "vue-router";
+import { onMounted, ref } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
 
-import { useFetchApi } from "@/composables/useFetchApi";
-import { useUserStore } from "@/stores/user";
+import { useFetchApi } from '@/composables/useFetchApi';
+import { useUserStore } from '@/stores/user';
 
 export function useAuth() {
   const route = useRoute();
@@ -11,13 +11,14 @@ export function useAuth() {
   const { useFetch } = useFetchApi();
   const storeUser = useUserStore();
 
-  const error = ref("customError");
+  const error = ref('customError');
   const isLoading = ref(true);
 
-  onMounted(() => {
+  onMounted(async () => {
     handleQueryError();
     setToken();
-    handleAuth();
+
+    await handleAuth();
 
     isLoading.value = false;
   });
@@ -34,9 +35,9 @@ export function useAuth() {
   function setToken() {
     if (isError()) return;
 
-    const token = route.query.token;
+    const { token } = route.query;
     if (!token) {
-      error.value = "authError";
+      error.value = 'authError';
       return;
     }
 
@@ -47,31 +48,31 @@ export function useAuth() {
     if (isError()) return;
 
     const response = await useFetch({
-      method: "GET",
-      endpoint: "oauth/user",
+      method: 'GET',
+      endpoint: 'oauth/user',
     });
 
-    handleAuthResponse(response);
+    await handleAuthResponse(response);
   }
 
-  function handleAuthResponse(response) {
+  async function handleAuthResponse(response) {
     if (response.data.ok) {
-      autorizeUser();
+      await autorizeUser();
       return;
     }
 
     if (response.status === 401) {
-      error.value = "authError";
+      error.value = 'authError';
     }
   }
 
-  function autorizeUser() {
-    localStorage.setItem("token", route.query.token);
-    router.push({ name: "home" });
+  async function autorizeUser() {
+    localStorage.setItem('token', route.query.token);
+    await router.push({ name: 'home' });
   }
 
   function isError() {
-    return error.value !== "customError";
+    return error.value !== 'customError';
   }
 
   return { error, isLoading };

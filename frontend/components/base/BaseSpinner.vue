@@ -1,8 +1,19 @@
+<script setup lang="ts">
+
+const props = withDefaults(defineProps<{
+  size?: string | number;
+}>(), {
+  size: '8',
+});
+
+</script>
+
 <template>
   <div role="status">
     <svg
       aria-hidden="true"
-      class="w-8 h-8 mr-2 text-gray-200 animate-spin fill-blue-600"
+      class=" text-gray-200 animate-spin fill-blue-600"
+      :class="`w-${props.size} h-${props.size}`"
       viewBox="0 0 100 101"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
