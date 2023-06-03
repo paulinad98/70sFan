@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import AppFooter from '@/components/globalComponents/app/AppFooter.vue';
-import AppNavigation from '@/components/globalComponents/app/AppNavigation.vue';
+import AppFooter from '@/components/app/AppFooter.vue';
+import AppNavigation from '@/components/app/AppNavigation.vue';
 import TheHeader from '@/components/landing/TheHeader.vue';
 import SectionOne from '@/components/landing/SectionOne.vue';
 import SectionTwo from '@/components/landing/SectionTwo.vue';
