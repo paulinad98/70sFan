@@ -3,7 +3,7 @@ import { useUserStore } from '@/stores/user';
 import { useCheckError } from '@/composables/useCheckError';
 import { setQuery } from '@/utils/query';
 
-export function useFetchApi(context) {
+export function useFetchApi() {
   const config = useRuntimeConfig();
   const API_URL = config.public.apiUrl;
 
@@ -12,9 +12,10 @@ export function useFetchApi(context) {
 
   const useFetch = async ({ method = 'GET', payload = {}, endpoint = '' }) => {
     const body = method !== 'GET' && JSON.stringify(payload);
+    let finalEndpoint = endpoint;
 
     if (method === 'GET' && Object.keys(payload).length > 0) {
-      endpoint = `${endpoint}?${setQuery(payload)}`;
+      finalEndpoint = `${endpoint}?${setQuery(payload)}`;
     }
 
     const token = storeUser.getToken();
@@ -33,7 +34,7 @@ export function useFetchApi(context) {
     }
 
     try {
-      const response = await fetch(`${API_URL}/${endpoint}`, options);
+      const response = await fetch(`${API_URL}/${finalEndpoint}`, options);
       const statusCode = response.status;
       const data = await response.json();
 

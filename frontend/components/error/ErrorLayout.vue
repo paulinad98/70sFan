@@ -1,5 +1,5 @@
 <script setup>
-import ErrorIcon from "@/components/error/ErrorIcon.vue";
+import ErrorIcon from '@/components/error/ErrorIcon.vue';
 </script>
 
 <template>

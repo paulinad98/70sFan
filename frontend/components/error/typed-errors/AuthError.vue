@@ -1,10 +1,10 @@
 <script setup>
-import ErrorHeader from "@/components/error/ErrorHeader.vue";
-import ErrorLink from "@/components/error/ErrorLink.vue";
-import ErrorLayout from "@/components/error/ErrorLayout.vue";
+import ErrorHeader from '@/components/error/ErrorHeader.vue';
+import ErrorLink from '@/components/error/ErrorLink.vue';
+import ErrorLayout from '@/components/error/ErrorLayout.vue';
 
-  const config = useRuntimeConfig();
-  const LANDING_URL = config.public.landingUrl;
+const config = useRuntimeConfig();
+const LANDING_URL = config.public.landingUrl;
 </script>
 
 <template>

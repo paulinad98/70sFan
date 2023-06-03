@@ -32,8 +32,8 @@
 </template>
 
 <script>
-import Breakdowns from "@/components/icons/Breakdowns.vue";
-import Games from "@/components/icons/Games.vue";
+import Breakdowns from '@/components/icons/Breakdowns.vue';
+import Games from '@/components/icons/Games.vue';
 
 export default {
   components: {

@@ -23,5 +23,8 @@ module.exports = {
     camelcase: 'off',
     'import/no-extraneous-dependencies': 'off',
     'no-undef': 'off',
+    'max-len': 'off',
+    'no-tabs': 'off',
+    'no-plusplus': 'off',
   },
 };

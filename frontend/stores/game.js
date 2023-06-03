@@ -1,10 +1,10 @@
-import { ref } from "vue";
-import { defineStore } from "pinia";
+import { ref } from 'vue';
+import { defineStore } from 'pinia';
 
-import { useTeamStore } from "@/stores/team";
-import { useFetchApi } from "@/composables/useFetchApi";
+import { useTeamStore } from '@/stores/team';
+import { useFetchApi } from '@/composables/useFetchApi';
 
-export const useGameStore = defineStore("game", () => {
+export const useGameStore = defineStore('game', () => {
   const { useFetch } = useFetchApi();
   const storeTeam = useTeamStore();
 
@@ -14,20 +14,21 @@ export const useGameStore = defineStore("game", () => {
     gameData.value.push(payload);
   }
 
+  // eslint-disable-next-line consistent-return
   async function getGames() {
     if (gameData.value.length > 0) return Promise.resolve();
 
     const response = await useFetch({
-      method: "GET",
-      endpoint: "game",
+      method: 'GET',
+      endpoint: 'game',
     });
 
     response.data.games.forEach((game) => {
       const homeTeamName = game.teams.find(
-        (team) => team.id === game.homeTeamId
+        (team) => team.id === game.homeTeamId,
       ).name;
       const awayTeamName = game.teams.find(
-        (team) => team.id === game.awayTeamId
+        (team) => team.id === game.awayTeamId,
       ).name;
 
       addGame([
@@ -48,16 +49,16 @@ export const useGameStore = defineStore("game", () => {
     const {
       data: { id },
     } = await useFetch({
-      method: "POST",
-      endpoint: "game",
+      method: 'POST',
+      endpoint: 'game',
       payload: { ...game },
     });
 
     const homeTeamName = storeTeam.teamData.find(
-      (team) => Number(team[0]) === Number(game.homeTeamId)
+      (team) => Number(team[0]) === Number(game.homeTeamId),
     )[1];
     const awayTeamName = storeTeam.teamData.find(
-      (team) => Number(team[0]) === Number(game.awayTeamId)
+      (team) => Number(team[0]) === Number(game.awayTeamId),
     )[1];
 
     addGame([
@@ -73,5 +74,7 @@ export const useGameStore = defineStore("game", () => {
     ]);
   }
 
-  return { gameData, addGame, getGames, postGame };
+  return {
+    gameData, addGame, getGames, postGame,
+  };
 });

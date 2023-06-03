@@ -11,7 +11,7 @@ const awayTeam = props.game.teams.find(
   (team) => team.id === props.game.awayTeamId,
 );
 
-const TeamLogo = (props) => h(
+const TeamLogo = (p) => h(
   'div',
   {
     class: 'text-center mb-2',
@@ -19,22 +19,22 @@ const TeamLogo = (props) => h(
   [
     h('img', {
       class: 'w-20 h-20 object-contain',
-      src: props.src,
-      alt: `${props.name} logo`,
+      src: p.src,
+      alt: `${p.name} logo`,
     }),
-    h('span', { class: 'text-xs text-gray-800 text-center' }, props.name),
+    h('span', { class: 'text-xs text-gray-800 text-center' }, p.name),
   ],
 );
 
-const TeamScore = (props) => h(
+const TeamScore = (p) => h(
   'span',
   {
     class: [
       'text-4xl font-bold',
-      props.score > props.opponentScore ? 'text-green-700' : 'text-gray-800',
+      p.score > p.opponentScore ? 'text-green-700' : 'text-gray-800',
     ],
   },
-  props.score,
+  p.score,
 );
 </script>
 

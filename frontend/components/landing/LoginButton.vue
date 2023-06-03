@@ -10,8 +10,8 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import { useRuntimeConfig } from "#app";
+import { ref } from 'vue';
+import { useRuntimeConfig } from '#app';
 
 export default {
   setup() {
@@ -21,7 +21,7 @@ export default {
     const redirectUri = runtimeConfig.public.patreonRedirectUri;
 
     const url = ref(
-      `https://patreon.com/oauth2/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}`
+      `https://patreon.com/oauth2/authorize?client_id=${clientId}&response_type=code&redirect_uri=${redirectUri}`,
     );
 
     return { url };

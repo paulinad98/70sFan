@@ -27,10 +27,10 @@
 </template>
 
 <script>
-import AppLogo from "./AppLogo.vue";
+import AppLogo from './AppLogo.vue';
 
-import Youtube from "../icons/Youtube.vue";
-import Patreon from "../icons/Patreon.vue";
+import Youtube from '../icons/Youtube.vue';
+import Patreon from '../icons/Patreon.vue';
 
 export default {
   components: {

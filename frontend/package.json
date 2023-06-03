@@ -6,7 +6,8 @@
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare",
-    "test": "vitest"
+    "test": "vitest",
+    "lint": "eslint --fix **/*.{js,ts,vue}"
   },
   "devDependencies": {
     "@nuxt/devtools": "^0.4.6",
