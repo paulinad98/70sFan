@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import { computed } from 'vue';
 import NextIcon from '@/components/icons/NextIcon.vue';
 import PrevIcon from '@/components/icons/PrevIcon.vue';
@@ -13,34 +13,31 @@ import {
   getPrevPage,
 } from '@/utils/pagination';
 
-const props = defineProps({
-  lastPage: {
-    type: Number,
-    required: true,
-  },
-  modelValue: Number,
-  maxPageDisplay: {
-    type: Number,
-    default: 5,
-    validator: (value) => value % 2 === 1,
-  },
+interface Props {
+  lastPage: number
+  modelValue: number,
+  maxPageDisplay?: 5 | 7 | 9 | 11 | 13 | 15,
+}
+
+const props = withDefaults(defineProps<Props>(), {
+  maxPageDisplay: 5,
 });
 
 // pagination logic
-const pagesArray = computed(() => setPaginationPagesArray(
+const pagesArray: ComputedRef<number[]> = computed(() => setPaginationPagesArray(
   props.maxPageDisplay,
   props.lastPage,
   props.modelValue,
 ));
 
-const nextPage = computed(() => getNextPage(props.modelValue, props.lastPage));
+const nextPage: ComputedRef<number> = computed(() => getNextPage(props.modelValue, props.lastPage));
 
-const prevPage = computed(() => getPrevPage(props.modelValue));
+const prevPage: ComputedRef<number> = computed(() => getPrevPage(props.modelValue));
 
 // update page
 const emits = defineEmits(['update:modelValue', 'change']);
 
-function updatePage(page) {
+function updatePage(page: number) {
   emits('update:modelValue', page);
   emits('change', page);
 }

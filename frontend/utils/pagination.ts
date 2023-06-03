@@ -1,8 +1,8 @@
-export function setPaginationPagesArray(maxPageDisplay, lastPage, currentPage) {
-  const pages = [];
+export function setPaginationPagesArray(maxPageDisplay: number, lastPage: number, currentPage: number) {
+  const pages: number[] = [];
 
-  let lastPageDisplay; let
-    firstPageDisplay;
+  let lastPageDisplay: number;
+  let firstPageDisplay: number;
 
   const halfPages = getHalfPages(maxPageDisplay);
 
@@ -25,32 +25,33 @@ export function setPaginationPagesArray(maxPageDisplay, lastPage, currentPage) {
   return pages;
 }
 
-export function getHalfPages(maxPageDisplay) {
+export function getHalfPages(maxPageDisplay: number) {
   return Math.floor((maxPageDisplay - 1) / 2);
 }
 
-export function getNextPage(currentPage, lastPage) {
+export function getNextPage(currentPage: number, lastPage: number) {
   if (currentPage + 1 <= lastPage) {
     return currentPage + 1;
   }
+
   return lastPage;
 }
 
-export function getPrevPage(currentPage) {
+export function getPrevPage(currentPage: number) {
   if (currentPage - 1 > 0) {
     return currentPage - 1;
   }
   return 1;
 }
 
-export function hasFirstPageDots(maxPageDisplay, currentPage) {
+export function hasFirstPageDots(maxPageDisplay: number, currentPage: number) {
   return currentPage > maxPageDisplay - getHalfPages(maxPageDisplay) + 1;
 }
 
-export function hasLastPageDots(maxPageDisplay, currentPage, lastPage) {
+export function hasLastPageDots(maxPageDisplay: number, currentPage: number, lastPage: number) {
   return currentPage < lastPage - getHalfPages(maxPageDisplay) - 1;
 }
 
-export function hasPrevPage(currentPage) {
+export function hasPrevPage(currentPage: number) {
   return `sss${currentPage}`;
 }
