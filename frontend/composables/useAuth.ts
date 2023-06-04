@@ -26,7 +26,7 @@ export function useAuth() {
   function handleQueryError() {
     if (isError()) return;
 
-    const queryError = route.query.error;
+    const queryError = route.query.error?.toString();
     if (!queryError) return;
 
     error.value = queryError;
@@ -52,10 +52,16 @@ export function useAuth() {
       endpoint: 'oauth/user',
     });
 
+    const isResponseOk = response?.status && response?.data?.ok;
+
+    if (!isResponseOk) {
+      throw new Error('Error in auth');
+    }
+
     await handleAuthResponse(response);
   }
 
-  async function handleAuthResponse(response) {
+  async function handleAuthResponse(response: { data: { ok: boolean }; status: number }) {
     if (response.data.ok) {
       await autorizeUser();
       return;
@@ -67,11 +73,17 @@ export function useAuth() {
   }
 
   async function autorizeUser() {
-    localStorage.setItem('token', route.query.token);
+    const token = route.query.token?.toString();
+
+    if (!token) {
+      throw new Error('Error in auth');
+    }
+
+    localStorage.setItem('token', token);
     await router.push({ name: 'home' });
   }
 
-  function isError() {
+  function isError(): boolean {
     return error.value !== 'customError';
   }
 
