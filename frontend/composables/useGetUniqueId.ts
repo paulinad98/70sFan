@@ -1,10 +1,11 @@
 let UUID = 0;
 
 export function useGetUniqueId() {
-  const getId = () => {
+  function getId(): number {
     UUID += 1;
+
     return UUID;
-  };
+  }
 
   return { getId };
 }
