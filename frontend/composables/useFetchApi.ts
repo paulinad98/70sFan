@@ -3,6 +3,14 @@ import { useUserStore } from '@/stores/user';
 import { useCheckError } from '@/composables/useCheckError';
 import { setQuery } from '@/utils/query';
 
+interface FetchConfig {
+  method?: string;
+  payload?: {
+    [key: string]: string | string[];
+  };
+  endpoint?: string;
+}
+
 export function useFetchApi() {
   const config = useRuntimeConfig();
   const API_URL = config.public.apiUrl;
@@ -10,7 +18,7 @@ export function useFetchApi() {
   const storeUser = useUserStore();
   const router = useRouter();
 
-  const useFetch = async ({ method = 'GET', payload = {}, endpoint = '' }) => {
+  const useFetch = async ({ method = 'GET', payload = {}, endpoint = '' }: FetchConfig) => {
     const body = method !== 'GET' && JSON.stringify(payload);
     let finalEndpoint = endpoint;
 
@@ -18,19 +26,23 @@ export function useFetchApi() {
       finalEndpoint = `${endpoint}?${setQuery(payload)}`;
     }
 
-    const token = storeUser.getToken();
     const options = {
       method,
       headers: {
         'Content-Type': 'application/json',
-        'x-auth-token': token,
       },
-      mode: 'cors',
-      credentials: 'include',
+      mode: 'cors' as RequestMode,
+      credentials: 'include' as RequestCredentials,
     };
 
+    const token: string | null = storeUser.getToken();
+
+    if (token) {
+      Object.assign(options.headers, { 'x-auth-token': token });
+    }
+
     if (body) {
-      options.body = body;
+      Object.assign(options, { body });
     }
 
     try {
