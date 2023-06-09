@@ -11,8 +11,6 @@ module.exports = (req, res, next) => {
     });
   }
 
-  console.log(token)
-
   try {
     const decoded = jwt.verify(token, JWT_PRIVATE_KEY);
     req.user = decoded;
