@@ -26,6 +26,7 @@ app.use((req, res, next) => {
     "http://127.0.0.1:5173",
     "https://70s-fan-front.vercel.app",
     "http://localhost:3000",
+    "https://70s-fan-5ahe.vercel.app/"
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
