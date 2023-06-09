@@ -3,7 +3,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const multer = require("multer");
 const sequelize = require("./util/database");
-const cors = require("cors");
 
 const Patreon = require("./models/patreon");
 const Team = require("./models/team");
@@ -27,7 +26,7 @@ app.use((req, res, next) => {
     "http://127.0.0.1:5173",
     "https://70s-fan-front.vercel.app",
     "http://localhost:3000",
-    "https://70s-fan-5ahe.vercel.app/"
+    "https://70s-fan-5ahe.vercel.app"
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
@@ -49,7 +48,7 @@ app.get("/", (req, res) => {
   return res.send("Express on Vercel");
 });
 
-app.use(cors());
+// app.use(cors());
 
 app.use("/oauth", oauthRoutes);
 app.use("/game", gameRoutes);

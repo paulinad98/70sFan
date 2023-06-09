@@ -31,7 +31,7 @@ export function useFetchApi() {
       headers: {
         'Content-Type': 'application/json',
       },
-      mode: 'no-cors' as RequestMode,
+      mode: 'cors' as RequestMode,
       credentials: 'include' as RequestCredentials,
     };
 
