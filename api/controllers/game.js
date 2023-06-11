@@ -117,6 +117,21 @@ exports.postGameFile = async (req, res, next) => {
     seasons = [...new Set(seasons)];
     teams = [...new Set(teams)];
 
+
+    const [teamsFromDb, seasonsFromDb, gamesFromDb] = await Promise.all([
+      Team.findAll(),
+      Season.findAll(),
+      Game.findAll(),
+    ]);
+
+    teams = teams.filter(
+      (team) => !teamsFromDb.find((teamFromDb) => teamFromDb.name === team)
+    );
+    seasons = seasons.filter(
+      (season) =>
+        !seasonsFromDb.find((seasonFromDb) => seasonFromDb.years === season)
+    );
+
     teams = teams.map((team) => {
       return { name: team, logoUrl: "" };
     });
@@ -130,6 +145,14 @@ exports.postGameFile = async (req, res, next) => {
       Team.findAll(),
       Season.findAll(),
     ]);
+
+    games = games.filter(
+      (game) =>
+        !gamesFromDb.find(
+          (gameFromDb) =>
+            gameFromDb.basketballReferenceUrl === game["Boxscore link"]
+        )
+    );
 
     games = games.map((game) => {
       const homeTeamId = teamsWithId.find(
@@ -155,6 +178,9 @@ exports.postGameFile = async (req, res, next) => {
         seasonPhase: game["Season"].split(" ")[1],
       };
     });
+
+    console.log(games)
+    console.log(games.length)
 
     const gamesWithId = await Game.bulkCreate(games);
 

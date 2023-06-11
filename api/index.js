@@ -48,8 +48,6 @@ app.get("/", (req, res) => {
   return res.send("Express on Vercel");
 });
 
-// app.use(cors());
-
 app.use("/oauth", oauthRoutes);
 app.use("/game", gameRoutes);
 app.use("/team", teamRoutes);
