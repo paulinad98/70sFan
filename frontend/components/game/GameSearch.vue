@@ -30,6 +30,13 @@ async function sendForm(page = 1) {
     }
   });
 
+  emit('update:modelValue', {
+    data: [],
+    meta: {},
+    currentPage: 1,
+    isLoading: true,
+  });
+
   const { data } = await useFetch({
     method: 'GET',
     endpoint: 'game',
@@ -40,6 +47,7 @@ async function sendForm(page = 1) {
     data: data.games,
     meta: data.meta,
     currentPage: page,
+    isLoading: false,
   });
 }
 </script>

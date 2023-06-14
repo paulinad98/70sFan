@@ -1,9 +1,10 @@
 <script setup>
-import { ref } from 'vue';
+import { ref, computed } from 'vue';
 import BasePagination from '@/components/base/BasePagination.vue';
 
 import GamePreview from '@/components/game/GamePreview.vue';
 import GameSearch from '@/components/game/GameSearch.vue';
+import GamePreviewSkeleton from '@/components/game/GamePreviewSkeleton.vue';
 
 import { useTeamStore } from '@/stores/team.js';
 import { useSeasonStore } from '@/stores/season.js';
@@ -18,9 +19,28 @@ const games = ref({
   data: [],
   meta: {},
   currentPage: 1,
+  isLoading: true,
 });
 
 const searchForm = ref(null);
+
+const gameComponent = computed(() => {
+  if (games.value.isLoading) {
+    return {
+      component: GamePreviewSkeleton,
+      data: Array.from({ length: 6 }, (_, index) => index).map((index) => ({
+        attrs: {},
+        id: index,
+      })),
+    };
+  }
+
+  return {
+    component: GamePreview,
+    data: games.value.data.map((game) => ({ id: game.id, attrs: { game } })),
+  };
+});
+
 </script>
 
 <template>
@@ -31,7 +51,7 @@ const searchForm = ref(null);
       <div
         class="grid grid-cols-[repeat(auto-fill,_minmax(330px,_1fr))] gap-10"
       >
-        <game-preview :key="game.id" v-for="game in games.data" :game="game" />
+        <component :is="gameComponent.component" :key="element.id" v-for="element in gameComponent.data" v-bind="element.attrs" />
       </div>
       <base-pagination
         class="text-center mt-8"

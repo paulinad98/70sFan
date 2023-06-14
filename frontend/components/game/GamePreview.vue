@@ -1,8 +1,9 @@
 <script setup>
 import { h } from 'vue';
 import GamePreviewInfo from '@/components/game/GamePreviewInfo.vue';
+import GamePreviewLayout from '@/components/game/GamePreviewLayout.vue';
 
-const props = defineProps({ game: Object });
+const props = defineProps({ game: Object, isLoading: Boolean });
 
 const homeTeam = props.game.teams.find(
   (team) => team.id === props.game.homeTeamId,
@@ -39,45 +40,47 @@ const TeamScore = (p) => h(
 </script>
 
 <template>
-  <div class="p-5 border-2 border-gray-700 bg-white rounded-md shadow-lg">
-    <div
-      class="grid grid-cols-[112px_auto_112px] grid-rows-[repeat(2,_auto)] justify-items-center items-center mb-5 mx-auto"
-    >
-      <team-logo :src="homeTeam.logoUrl" :name="homeTeam.name" />
-      <team-score
-        :score="game.homeTeamScore"
-        :opponentScore="game.awayTeamScore"
-        class="row-start-2"
-      />
-
-      <div class="row-start-1 row-end-3 text-center">
-        <game-preview-info
-          :season="game.season"
-          :date="game.date"
-          :basketball-reference-url="game.basketballReferenceUrl"
+  <game-preview-layout>
+    <template #team-1>
+        <team-logo :src="homeTeam.logoUrl" :name="homeTeam.name" />
+        <team-score
+          :score="game.homeTeamScore"
+          :opponentScore="game.awayTeamScore"
+          class="row-start-2"
         />
-      </div>
+    </template>
 
-      <team-logo :src="awayTeam.logoUrl" :name="awayTeam.name" />
-      <team-score
-        :score="game.awayTeamScore"
-        :opponentScore="game.homeTeamScore"
+    <template #game-preview-info>
+      <game-preview-info
+        :season="game.season"
+        :date="game.date"
+        :basketball-reference-url="game.basketballReferenceUrl"
       />
-    </div>
+    </template>
 
-    <p class="mb-4 text-sm leading-normal">
-      {{ game.description }}
-    </p>
+    <template #team-2>
+        <team-logo :src="awayTeam.logoUrl" :name="awayTeam.name" />
+        <team-score
+          :score="game.awayTeamScore"
+          :opponentScore="game.homeTeamScore"
+        />
+    </template>
 
-    <div class="relative">
-      <iframe
-        class="w-full h-56"
-        :src="game.gameUrl"
-        title="YouTube video player"
-        frameborder="0"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen
-      ></iframe>
-    </div>
-  </div>
+    <template #bottom>
+      <p class="mb-4 text-sm leading-normal">
+        {{ game.description }}
+      </p>
+
+      <div class="relative">
+        <iframe
+          class="w-full h-56"
+          :src="game.gameUrl"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </div>
+    </template>
+  </game-preview-layout>
 </template>
