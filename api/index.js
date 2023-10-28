@@ -2,14 +2,15 @@ import "dotenv/config.js";
 import express from "express";
 import bodyParser from "body-parser";
 import multer from "multer";
+
 import sequelize from "./util/database.js";
-
 import { Game, Season, Team, Patreon } from "./models/index.js";
-
 import oauthRoutes from "./routes/oauth.js";
 import gameRoutes from "./routes/game.js";
 import teamRoutes from "./routes/team.js";
 import seasonRoutes from "./routes/season.js";
+
+const { SERVER_PORT } = process.env;
 
 const app = express();
 
@@ -52,8 +53,8 @@ const startServer = async () => {
   try {
     await sequelize.sync();
 
-    app.listen(5000, () => {
-      console.log("Server listening on port 5000");
+    app.listen(SERVER_PORT, () => {
+      console.log(`Server listening on port ${SERVER_PORT}`);
     });
   } catch (err) {
     console.log(err);
