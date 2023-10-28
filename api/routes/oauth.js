@@ -1,12 +1,12 @@
-const express = require("express");
-const auth = require("../middleware/auth");
+import express from "express";
+
+import auth from "../middleware/auth.js";
+import oauthController from "../controllers/oauth.js";
 
 const router = express.Router();
-
-const oauthController = require("../controllers/oauth");
 
 router.get("/", oauthController.oauthClient);
 
 router.get("/user", auth, oauthController.getUser);
 
-module.exports = router;
+export default router;

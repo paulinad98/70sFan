@@ -1,6 +1,5 @@
-const Sequelize = require("sequelize");
-
-const sequelize = require("../util/database");
+import Sequelize from "sequelize";
+import sequelize from "../util/database.js";
 
 const Season = sequelize.define("season", {
   id: {
@@ -12,4 +11,4 @@ const Season = sequelize.define("season", {
   years: { type: Sequelize.STRING, allowNull: false },
 });
 
-module.exports = Season;
+export default Season;

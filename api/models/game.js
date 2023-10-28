@@ -1,6 +1,5 @@
-const Sequelize = require("sequelize");
-
-const sequelize = require("../util/database");
+import Sequelize from "sequelize";
+import sequelize from "../util/database.js";
 
 const Game = sequelize.define("game", {
   id: {
@@ -30,4 +29,4 @@ const Game = sequelize.define("game", {
   seasonPhase: { type: Sequelize.STRING, allowNull: false },
 });
 
-module.exports = Game;
+export default Game;

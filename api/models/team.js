@@ -1,6 +1,5 @@
-const Sequelize = require("sequelize");
-
-const sequelize = require("../util/database");
+import Sequelize from "sequelize";
+import sequelize from "../util/database.js";
 
 const Team = sequelize.define("team", {
   id: {
@@ -13,4 +12,4 @@ const Team = sequelize.define("team", {
   logoUrl: { type: Sequelize.STRING, allowNull: false },
 });
 
-module.exports = Team;
+export default Team;

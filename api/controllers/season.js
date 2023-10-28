@@ -1,6 +1,6 @@
-const Season = require("../models/season");
+import Season from "../models/season.js";
 
-exports.postSeason = async (req, res, next) => {
+const postSeason = async (req, res, next) => {
   const { years } = req.body;
 
   try {
@@ -12,7 +12,7 @@ exports.postSeason = async (req, res, next) => {
   }
 };
 
-exports.getSeasons = async (req, res, next) => {
+const getSeasons = async (req, res, next) => {
   try {
     const seasons = await Season.findAll();
 
@@ -20,4 +20,9 @@ exports.getSeasons = async (req, res, next) => {
   } catch (err) {
     return res.status(500).send(err);
   }
+};
+
+export default {
+  postSeason,
+  getSeasons,
 };

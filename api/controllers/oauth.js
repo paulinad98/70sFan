@@ -1,10 +1,9 @@
-const { oauth } = require("patreon");
+import { oauth } from "patreon";
+import jwt from "jsonwebtoken";
 const fetch = (...args) =>
   import("node-fetch").then(({ default: fetch }) => fetch(...args));
 
-const Patreon = require("../models/patreon");
-
-const jwt = require("jsonwebtoken");
+import Patreon from "../models/patreon.js";
 
 const CLIENT_ID = process.env.PATREON_CLIENT_ID;
 const CLIENT_SECRET = process.env.PATREON_CLIENT_SECRET;
@@ -38,7 +37,7 @@ const dateDiffInSeconds = (a, b) => {
   return Math.floor((utc2 - utc1) / MS_PER_SECOND);
 };
 
-exports.oauthClient = async (req, res, next) => {
+const oauthClient = async (req, res, next) => {
   const { code } = req.query;
 
   try {
@@ -86,11 +85,16 @@ exports.oauthClient = async (req, res, next) => {
   }
 };
 
-exports.getUser = async (req, res, next) => {
+const getUser = async (req, res, next) => {
   const { id, full_name } = req.user;
 
   return res.status(200).send({
     ok: true,
     patreon: { id, full_name },
   });
+};
+
+export default {
+  oauthClient,
+  getUser,
 };

@@ -1,11 +1,11 @@
-const Team = require("../models/team");
-const Game = require("../models/game");
+import { Op } from "sequelize";
+import axios from "axios";
+import cheerio from "cheerio";
 
-const { Op } = require("sequelize");
-const axios = require("axios");
-const cheerio = require("cheerio");
+import Team from "../models/team.js";
+import Game from "../models/game.js";
 
-exports.postTeam = async (req, res, next) => {
+const postTeam = async (req, res, next) => {
   const { name, logoUrl } = req.body;
 
   try {
@@ -17,7 +17,7 @@ exports.postTeam = async (req, res, next) => {
   }
 };
 
-exports.getTeams = async (req, res, next) => {
+const getTeams = async (req, res, next) => {
   try {
     const teams = await Team.findAll();
 
@@ -27,7 +27,7 @@ exports.getTeams = async (req, res, next) => {
   }
 };
 
-exports.setTeamsLogoFromBasketballReference = async (req, res, next) => {
+const setTeamsLogoFromBasketballReference = async (req, res, next) => {
   try {
     const teamWihoutLogo = await Team.findOne({
       where: { logoUrl: "" },
@@ -56,4 +56,10 @@ exports.setTeamsLogoFromBasketballReference = async (req, res, next) => {
   } catch (err) {
     console.log(err);
   }
+};
+
+export default {
+  postTeam,
+  getTeams,
+  setTeamsLogoFromBasketballReference,
 };

@@ -1,13 +1,12 @@
-const path = require("path");
+import path from "path";
+import express from "express";
 
-const express = require("express");
-const auth = require("../middleware/auth");
+import auth from "../middleware/auth.js";
+import seasonController from "../controllers/season.js";
 
 const router = express.Router();
-
-const seasonController = require("../controllers/season");
 
 router.post("/", auth, seasonController.postSeason);
 router.get("/", auth, seasonController.getSeasons);
 
-module.exports = router;
+export default router;

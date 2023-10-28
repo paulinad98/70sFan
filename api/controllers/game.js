@@ -1,33 +1,22 @@
-const { Op } = require("sequelize");
+import { Op } from "sequelize";
 
-const axios = require("axios");
-const cheerio = require("cheerio");
-const reader = require("xlsx");
+import axios from "axios";
+import cheerio from "cheerio";
+import reader from "xlsx";
 
-const Game = require("../models/game");
-const TeamGames = require("../models/teamGames");
-const SeasonGames = require("../models/seasonGames");
-const Team = require("../models/team");
-const Season = require("../models/season");
-
-const createTeamGames = (gameId, teamId) => {
-  return TeamGames.create({ gameId, teamId });
-};
-
-const createSeasonGames = (gameId, seasonId) => {
-  return SeasonGames.create({ gameId, seasonId });
-};
+import Game from "../models/game.js";
+import Team from "../models/team.js";
+import Season from "../models/season.js";
 
 function ExcelDateToJSDate(date) {
   const newDate = new Date(Date.UTC(0, 0, date - 1));
   return newDate;
 }
 
-exports.postGame = async (req, res, next) => {
+const postGame = async (req, res, next) => {
   let {
     date,
     seasonId,
-    season,
     homeTeamScore,
     awayTeamScore,
     homeTeamId,
@@ -37,11 +26,6 @@ exports.postGame = async (req, res, next) => {
     description,
     seasonPhase,
   } = req.body;
-
-  if (!seasonId && season) {
-    const seasonObject = await Season.create({ years: season });
-    seasonId = seasonObject.id;
-  }
 
   try {
     const game = await Game.create({
@@ -54,14 +38,8 @@ exports.postGame = async (req, res, next) => {
       gameUrl: gameUrl.split(";"),
       basketballReferenceUrl,
       description,
-      seasonPhase: "regular",
+      seasonPhase,
     });
-
-    let homeTeam = createTeamGames(game.id, homeTeamId);
-    let awayTeam = createTeamGames(game.id, awayTeamId);
-    let seasonGames = createSeasonGames(game.id, seasonId);
-
-    await Promise.all([homeTeam, awayTeam, seasonGames]);
 
     return res.status(201).send({ message: "Game created", id: game.id });
   } catch (err) {
@@ -70,7 +48,7 @@ exports.postGame = async (req, res, next) => {
   }
 };
 
-exports.postGameFile = async (req, res, next) => {
+const postGameFile = async (req, res, next) => {
   let file = req.file;
 
   try {
@@ -116,7 +94,6 @@ exports.postGameFile = async (req, res, next) => {
 
     seasons = [...new Set(seasons)];
     teams = [...new Set(teams)];
-
 
     const [teamsFromDb, seasonsFromDb, gamesFromDb] = await Promise.all([
       Team.findAll(),
@@ -179,8 +156,8 @@ exports.postGameFile = async (req, res, next) => {
       };
     });
 
-    console.log(games)
-    console.log(games.length)
+    console.log(games);
+    console.log(games.length);
 
     const gamesWithId = await Game.bulkCreate(games);
 
@@ -193,11 +170,6 @@ exports.postGameFile = async (req, res, next) => {
       gameSeasonArray.push({ gameId: game.id, seasonId: game.seasonId });
     });
 
-    await Promise.all([
-      TeamGames.bulkCreate(gameTeamArray),
-      SeasonGames.bulkCreate(gameSeasonArray),
-    ]);
-
     return res.status(201).send({ message: "Game created" });
   } catch (err) {
     console.log(err);
@@ -205,7 +177,7 @@ exports.postGameFile = async (req, res, next) => {
   }
 };
 
-exports.getGames = async (req, res, next) => {
+const getGames = async (req, res, next) => {
   let { seasonsId, teamsId, seasonPhase, page } = req.query;
 
   page = +page;
@@ -234,7 +206,11 @@ exports.getGames = async (req, res, next) => {
 
     const filterGames = Game.findAll({
       where,
-      include: { model: Team },
+      include: [
+        { model: Team, as: "homeTeam" },
+        { model: Team, as: "awayTeam" },
+        { model: Season },
+      ],
       limit,
       offset,
     });
@@ -249,11 +225,10 @@ exports.getGames = async (req, res, next) => {
   }
 };
 
-exports.setGameScoresFromBasketballReference = async (req, res, next) => {
+const setGameScoresFromBasketballReference = async (req, res, next) => {
   try {
     const gamesWithNoScore = await Game.findAll({
       where: { [Op.or]: [{ homeTeamScore: 0 }, { awayTeamScore: 0 }] },
-      include: { model: Team },
     });
 
     const req = [];
@@ -274,7 +249,16 @@ exports.setGameScoresFromBasketballReference = async (req, res, next) => {
     });
 
     await Promise.all(req);
+
+    return res.status(200).send({ message: "Game scores updated" });
   } catch (err) {
     console.log(err);
   }
+};
+
+export default {
+  postGame,
+  postGameFile,
+  getGames,
+  setGameScoresFromBasketballReference,
 };

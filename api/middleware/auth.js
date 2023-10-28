@@ -1,8 +1,8 @@
-const jwt = require("jsonwebtoken");
+import jwt from "jsonwebtoken";
 
 const JWT_PRIVATE_KEY = process.env.PRIVATE_KEY;
 
-module.exports = (req, res, next) => {
+export default (req, res, next) => {
   const token = req.header("x-auth-token");
   if (!token) {
     return res.status(401).send({

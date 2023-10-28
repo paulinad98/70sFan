@@ -1,20 +1,15 @@
-require("dotenv").config();
-const express = require("express");
-const bodyParser = require("body-parser");
-const multer = require("multer");
-const sequelize = require("./util/database");
+import "dotenv/config.js";
+import express from "express";
+import bodyParser from "body-parser";
+import multer from "multer";
+import sequelize from "./util/database.js";
 
-const Patreon = require("./models/patreon");
-const Team = require("./models/team");
-const Game = require("./models/game");
-const Season = require("./models/season");
-const TeamGames = require("./models/teamGames");
-const SeasonGames = require("./models/seasonGames");
+import { Game, Season, Team, Patreon } from "./models/index.js";
 
-const oauthRoutes = require("./routes/oauth");
-const gameRoutes = require("./routes/game");
-const teamRoutes = require("./routes/team");
-const seasonRoutes = require("./routes/season");
+import oauthRoutes from "./routes/oauth.js";
+import gameRoutes from "./routes/game.js";
+import teamRoutes from "./routes/team.js";
+import seasonRoutes from "./routes/season.js";
 
 const app = express();
 
@@ -26,7 +21,7 @@ app.use((req, res, next) => {
     "http://127.0.0.1:5173",
     "https://70s-fan-front.vercel.app",
     "http://localhost:3000",
-    "https://70s-fan-5ahe.vercel.app"
+    "https://70s-fan-5ahe.vercel.app",
   ];
   const origin = req.headers.origin;
   if (allowedOrigins.includes(origin)) {
@@ -55,13 +50,8 @@ app.use("/season", seasonRoutes);
 
 const startServer = async () => {
   try {
-    Game.belongsToMany(Team, { through: "TeamGames" });
-    Team.belongsToMany(Game, { through: "TeamGames" });
-
-    Game.belongsToMany(Season, { through: "SeasonGames" });
-    Season.belongsToMany(Game, { through: "SeasonGames" });
-
     await sequelize.sync();
+
     app.listen(5000, () => {
       console.log("Server listening on port 5000");
     });
@@ -72,4 +62,4 @@ const startServer = async () => {
 
 startServer();
 
-module.exports = app;
+export default app;
